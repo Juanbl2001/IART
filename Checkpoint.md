@@ -24,7 +24,7 @@ There is always going to be a solution for every labyrinth. This solution is goi
 
 ### Initial state
 
-Can be any (x,y), usually in one of the corners of the labyrinth.
+Can be any (x,y) with place(x,y) = 0, usually in one of the corners of the labyrinth.
 We are considering it's (0,0), for example.
 
 ### Objective test

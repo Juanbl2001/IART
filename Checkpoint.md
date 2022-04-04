@@ -5,7 +5,7 @@ This is a single player game where the goal is to find the (shortest) path to a 
 
 ## Solution
 
-There is always going to be a solution for every labyrinth. This solution is going to be the sequence of moves for the shortest path to the exit. This sequence needs to be repeated until the robot reaches the goal.
+There is always going to be a solution for every labyrinth. This solution is going to be the smallest sequence of moves for the path to the exit. This sequence needs to be repeated until the robot reaches the goal.
 
 ## References
 
@@ -24,7 +24,7 @@ There is always going to be a solution for every labyrinth. This solution is goi
 
 ### Initial state
 
-Can be any (x,y) with place(x,y) = 0, usually in one of the corners of the labyrinth.
+Can be any (x,y), usually in one of the corners of the labyrinth.
 We are considering it's (0,0), for example.
 
 ### Objective test
@@ -40,9 +40,23 @@ Any (x,y) and place(x,y) = 2.
 | LEFT  | x>0 & place(x,y)!=1       | x = x-1   |  1   |
 | RIGHT | x<xSize & place(x,y)!=1   | x = x+1   |  1   |
 
+### Heuristic function
+
+#### Greedy -- Manhattan Distance
+h(n) = |n.x - f.x| + |n.y - f.y| #f being the final coordinate
+
 ## Programming language
 
-We are using **Python** for this project.
-*explain why*
+We are using **Python** for this project. The main reason being it is a high level language with many libraries for AI & ML which will not only save as time but also allows to create a better and more efficient program.
 
 ## Data structures to be used
+For our game,  only the maze and the current position of the robot are needed
+### Maze
+2-D array (ex:[[1,1,1,1,1],
+        [1,0,0,0,1],
+        [1,0,1,0,1],
+        [1,0,1,0,1],
+        [1,0,0,2,1],
+        [1,1,1,1,1]])
+### Robot Position
+List of two elements (ex: [x,y])

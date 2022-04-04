@@ -2,6 +2,7 @@
 
 ## Team members
 - Juan Bellon [201908142]
+- Nuno Castro [202003324]
 
 ## To do
 ### Topic 1: Heuristic Search Methods for One Player Solitaire Games

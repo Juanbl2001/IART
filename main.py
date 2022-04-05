@@ -1,6 +1,7 @@
 from logos import *
 from maps import *
 from utils import *
+import time
 
 def main():
     
@@ -64,33 +65,40 @@ def human_game(maze, pos):
     #Movement selector
     while pos[0] != exit_pos[0] or pos[1] != exit_pos[1]:
         printMaze(maze, pos, xsize, ysize)
-        mov = input('Choose movement direction: \n 1 => Left \n 2 => Right \n 3 => Up \n 4 => Down \n 5 => Hint \n 6 => Quit \n ->')
-        
-        if eval(mov) == 1:
-            moveleft(pos, maze)
-            
-        elif eval(mov) == 2:
-            moveright(pos, maze, xsize)
-            
-        elif eval(mov) == 3:
-            moveup(pos, maze)
-            
-        elif eval(mov) == 4:
-            movedown(pos, maze, ysize)
+        mov = input('Choose movements: \n A => Left \n D => Right \n W => Up \n S => Down \n E => Quit \n ->')
 
-        elif eval(mov) == 5:
-            print('Hint\n')
-            
-        elif eval(mov) == 6:
-            print('BETTER LUCK NEXT TRY!!!\n')
-            return    
+        for i in range(10):
+            for j in range(len(mov)):
+                if mov[j].upper() == 'A':
+                    moveleft(pos, maze)
+                elif mov[j].upper() == 'D':
+                    moveright(pos, maze, xsize)
+                    
+                elif mov[j].upper() == 'W':
+                    moveup(pos, maze)
+                    
+                elif mov[j].upper() == 'S':
+                    movedown(pos, maze, ysize)
+                    
+                elif mov[j].upper() == 'E':
+                    print('BETTER LUCK NEXT TRY!!!\n')
+                    return
+                else:  
+                    print('INVALID OPTION!\n')
+                #Print Board and option selected
+                print("\nNew move:")
+                print(mov[j].upper())
+                print("\n")
+                printMaze(maze, pos, xsize, ysize)
 
-        else:  
-            print('INVALID OPTION!\n')
-    
+                time.sleep(2) #check table
+
+                if(pos[0] == exit_pos[0] and pos[1] == exit_pos[1]): #Verify Victory
+                    print('YOU WON!!!\n')
+                    return
     # Win state
     printMaze(maze, pos, xsize, ysize)
-    print('YOU WON!!!\n')
+    print('Try again next time!!\n')
     return
 
 main()

@@ -91,11 +91,10 @@ def human_game(maze, pos):
                 print("\n")
                 printMaze(maze, pos, xsize, ysize)
 
-                time.sleep(2) #check table
-
                 if(pos[0] == exit_pos[0] and pos[1] == exit_pos[1]): #Verify Victory
                     print('YOU WON!!!\n')
                     return
+                time.sleep(2) #check table
     # Win state
     printMaze(maze, pos, xsize, ysize)
     print('Try again next time!!\n')

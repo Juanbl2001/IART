@@ -48,7 +48,10 @@ def get_xsize(maze):
 def get_ysize(maze):
     return len(maze)
 
-def get_exit_pos(maze, ysize, xsize):
+def get_exit_pos(maze):
+
+    xsize = get_xsize(maze)
+    ysize = get_ysize(maze)
 
     for i in range(ysize):
         for j in range(xsize):

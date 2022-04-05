@@ -35,16 +35,16 @@ def human_mode():
         maze_sel = input('Choose map: \n 1 => test \n 2 => ??? \n 3 => ??? \n 4 => ??? \n 5 => Exit \n ->')
         
         if eval(maze_sel) == 1:
-            human_game(test, [1,1])
+            human_game(test, testInit)
             
         elif eval(maze_sel) == 2:
-            human_game(test, [1,1])
+            human_game(test, testInit)
             
         elif eval(maze_sel) == 3:
-            human_game(test, [1,1])
+            human_game(test, testInit)
             
         elif eval(maze_sel) == 4:
-            human_game(test, [1,1])
+            human_game(test, testInit)
             
         elif eval(maze_sel) == 5:
             print('GOODBYE!!!\n')
@@ -59,7 +59,7 @@ def human_game(maze, pos):
     #Calculate maze dimensions and exit position
     xsize = get_xsize(maze)
     ysize = get_ysize(maze)
-    exit_pos = get_exit_pos(maze, ysize, xsize)
+    exit_pos = get_exit_pos(maze)
     
     #Movement selector
     while pos[0] != exit_pos[0] or pos[1] != exit_pos[1]:
@@ -83,7 +83,7 @@ def human_game(maze, pos):
             
         elif eval(mov) == 6:
             print('BETTER LUCK NEXT TRY!!!\n')
-            return    
+            return 
 
         else:  
             print('INVALID OPTION!\n')

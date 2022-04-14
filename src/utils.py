@@ -1,23 +1,25 @@
+from maps import *
+
 def moveright(pos, maze, xsize):
-    if((maze[pos[0]][pos[1] + 1] == 0 or maze[pos[0]][pos[1] + 1] == 2) and pos[1] < xsize):
+    if((maze[pos[0]][pos[1] + 1][3] != 1) and pos[1] < xsize):
         pos[1] += 1
         return 1
     return 0
 
 def moveleft(pos, maze):
-    if((maze[pos[0]][pos[1] - 1] == 0 or maze[pos[0]][pos[1] - 1] == 2) and pos[1] > 1):      
+    if((maze[pos[0]][pos[1] - 1][2] != 1) and pos[1] > 1):      
         pos[1] -= 1
         return 1
     return 0
 
 def moveup(pos, maze):
-    if((maze[pos[0] - 1][pos[1]] == 0 or maze[pos[0] - 1][pos[1]] == 2) and pos[0] > 1):
+    if((maze[pos[0] - 1][pos[1]][0] != 1) and pos[0] > 1):
         pos[0] -= 1
         return 1
     return 0
 
 def movedown(pos, maze, ysize):
-    if((maze[pos[0] + 1][pos[1]] == 0 or maze[pos[0] + 1][pos[1]] == 2) and pos[0] < ysize):      
+    if((maze[pos[0] + 1][pos[1]][1] != 1) and pos[0] < ysize):      
         pos[0] += 1
         return 1
     return 0
@@ -47,16 +49,6 @@ def get_xsize(maze):
 
 def get_ysize(maze):
     return len(maze)
-
-def get_exit_pos(maze):
-
-    xsize = get_xsize(maze)
-    ysize = get_ysize(maze)
-
-    for i in range(ysize):
-        for j in range(xsize):
-            if maze[i][j] == 2:
-                return [i,j]
 
 def printlogo(logo):
     for i in range(len(logo)):

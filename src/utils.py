@@ -1,40 +1,41 @@
 from maps import *
 
-def moveright(pos, maze, xsize):
-    if((maze[pos[0]][pos[1] + 1][3] != 1) and pos[1] < xsize):
+def moveright(pos, maze):
+    if((maze[pos[0]][pos[1]][3] != 1)):
         pos[1] += 1
         return 1
     return 0
 
 def moveleft(pos, maze):
-    if((maze[pos[0]][pos[1] - 1][2] != 1) and pos[1] > 1):      
+    if((maze[pos[0]][pos[1]][2] != 1)):      
         pos[1] -= 1
         return 1
     return 0
 
 def moveup(pos, maze):
-    if((maze[pos[0] - 1][pos[1]][0] != 1) and pos[0] > 1):
+    if((maze[pos[0]][pos[1]][0] != 1)):
         pos[0] -= 1
         return 1
     return 0
 
 def movedown(pos, maze, ysize):
-    if((maze[pos[0] + 1][pos[1]][1] != 1) and pos[0] < ysize):      
+    if((maze[pos[0]][pos[1]][1] != 1)):      
         pos[0] += 1
         return 1
     return 0
 
-def check(pos,maze,side,xsize,ysize):
-    if side=='L' and (maze[pos[0]][pos[1] - 1][2] != 1) and pos[1] > 1:
-        return True
-    elif side =='R' and (maze[pos[0]][pos[1] + 1][3] != 1) and pos[1] < xsize:
-        return True
-    elif side == 'U' and (maze[pos[0] - 1][pos[1]][0] != 1) and pos[0] > 1:
-        return True
-    elif side == 'D' and (maze[pos[0] + 1][pos[1]][1] != 1) and pos[0] < ysize:
-        return True
-    else:
-        return False
+#check for available positions around a certain pos
+def check(pos,maze):
+    possibleMoves = []
+    if (maze[pos[0]][pos[1]][2] != 1):
+        possibleMoves.append([pos[0],pos[1]-1])
+    if (maze[pos[0]][pos[1]][3] != 1):
+        possibleMoves.append([pos[0],pos[1]+1])
+    if (maze[pos[0]][pos[1]][0] != 1):
+        possibleMoves.append([pos[0]-1,pos[1]])
+    if (maze[pos[0]][pos[1]][1] != 1):
+        possibleMoves.append([pos[0]+1,pos[1]])
+    return possibleMoves
 
 def printMaze(maze, pos, xsize, ysize):
     

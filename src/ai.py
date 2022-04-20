@@ -35,7 +35,7 @@ def dfs(neighbours, position, destination, visited = None, path = None):
 
     if position[0] != destination[0] or position[1] != destination[1]:
 
-        neighbours = checkNeighbours()
+        neighbours = check()
 
         for neighbour in neighbours[position]:
             if neighbour not in visited:
@@ -43,7 +43,7 @@ def dfs(neighbours, position, destination, visited = None, path = None):
 
     return path
     
-def bfs_shortest_path(graph, start, goal):
+def bfs_shortest_path(start, goal):
     # keep track of explored nodes
     explored = []
     # keep track of all the paths to be checked
@@ -51,7 +51,7 @@ def bfs_shortest_path(graph, start, goal):
  
     # return path if start is goal
     if start == goal:
-        return "That was easy! Start = goal"
+        return [goal]
  
     # keeps looping until all possible paths have been checked
     while queue:
@@ -60,7 +60,7 @@ def bfs_shortest_path(graph, start, goal):
         # get the last node from the path
         node = path[-1]
         if node not in explored:
-            neighbours = checkNeighbours()
+            neighbours = check()
             # go through all neighbour nodes, construct a new path and
             # push it into the queue
             for neighbour in neighbours:
@@ -75,5 +75,5 @@ def bfs_shortest_path(graph, start, goal):
             explored.append(node)
  
     # in case there's no path between the 2 nodes
-    return "So sorry, but a connecting path doesn't exist :("
- 
+    print("No path to destiny exists")
+    return 0

@@ -3,8 +3,6 @@
 # Heuristic -> Manhattan distance
 
 from utils import *
-from main import *
-
 
 valueCost = 0
 

@@ -47,7 +47,7 @@ def bfs_shortest_path(graph, start, goal):
     # keep track of explored nodes
     explored = []
     # keep track of all the paths to be checked
-    queue = [[start]]
+    queue = [start]
  
     # return path if start is goal
     if start == goal:
@@ -60,7 +60,7 @@ def bfs_shortest_path(graph, start, goal):
         # get the last node from the path
         node = path[-1]
         if node not in explored:
-            neighbours = graph[node]
+            neighbours = checkNeighbours()
             # go through all neighbour nodes, construct a new path and
             # push it into the queue
             for neighbour in neighbours:
@@ -77,4 +77,3 @@ def bfs_shortest_path(graph, start, goal):
     # in case there's no path between the 2 nodes
     return "So sorry, but a connecting path doesn't exist :("
  
-bfs_shortest_path(graph, 'G', 'D') 

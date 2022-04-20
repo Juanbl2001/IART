@@ -9,21 +9,30 @@ from main import *
 valueCost = 0
 
 
-def heuristic(robotPos, maze):
+def linDist(robotPos, finalPos):
 
-    exit = testFin
-    
-    h = abs(robotPos[0] - exit[0]) + abs(robotPos[1] - exit[1])
+    h = ((robotPos[0] - finalPos[0]) ^ 2 +
+         (robotPos[1] - finalPos[1]) ^ 2) ^ 0.5
 
     return h
 
+
+def manDist(robotPos, finalPos):
+
+    h = abs(robotPos[0] - finalPos[0]) + abs(robotPos[1] - finalPos[1])
+
+    return h
+
+
 def addCost():
-    valueCost+=1
+    valueCost += 1
+
 
 def getCost():
     return valueCost
 
-def dfs(neighbours, position, destination, visited = None, path = None): 
+
+def dfs(neighbours, position, destination, visited=None, path=None):
 
     if visited is None:
         visited = []
@@ -42,17 +51,18 @@ def dfs(neighbours, position, destination, visited = None, path = None):
                 dfs(neighbours, neighbour, visited, path)
 
     return path
-    
+
+
 def bfs_shortest_path(start, goal):
     # keep track of explored nodes
     explored = []
     # keep track of all the paths to be checked
     queue = [start]
- 
+
     # return path if start is goal
     if start == goal:
         return [goal]
- 
+
     # keeps looping until all possible paths have been checked
     while queue:
         # pop the first path from the queue
@@ -70,10 +80,10 @@ def bfs_shortest_path(start, goal):
                 # return path if neighbour is goal
                 if neighbour == goal:
                     return new_path
- 
+
             # mark node as explored
             explored.append(node)
- 
+
     # in case there's no path between the 2 nodes
     print("No path to destiny exists")
     return 0

@@ -33,3 +33,12 @@ operators (names, preconditions, effects and costs), heuristics/evaluation funct
 (solution representation, neighborhood/mutation and crossover functions, hard constraints, evaluation
 functions)<br>(4) implementation work already carried out (programming language, development
 environment, data structures, among others).
+
+
+## SETUP
+
+<code>
+sudo apt-get install python3-tk
+pip install matplotlib
+pip install pyamaze
+</code>

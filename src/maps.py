@@ -43,7 +43,7 @@ udlr_wall = listBitwiseOr(listBitwiseOr(u_wall,d_wall),listBitwiseOr(l_wall,r_wa
 
 testInit = [0,0]
 
-testFin = [6,5]
+testGoal = [4,5]
 
 test = [[ul_wall, u_wall, u_wall, u_wall, ur_wall],
         [l_wall, no_wall, dr_wall, l_wall, r_wall],
@@ -59,9 +59,14 @@ test2 = [[ul_wall, u_wall, u_wall, u_wall, ur_wall],
         [l_wall, no_wall, dr_wall, l_wall, r_wall],
         [dl_wall, d_wall, d_wall, d_wall, dr_wall]]
 
+testGoal2 = [4,4]
+
 test3 = [[ul_wall, u_wall, u_wall, u_wall, ur_wall],
         [l_wall, no_wall, no_wall, no_wall, r_wall],
         [dl_wall, no_wall, no_wall, no_wall, r_wall],
         [dl_wall, no_wall, no_wall, no_wall, r_wall],
         [dl_wall, d_wall, d_wall, d_wall, dr_wall]]
+
+#(X, Y, DIRECTION ->
+testGoal3 = [3,0,"u"]
 #print(ur_wall)

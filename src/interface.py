@@ -43,10 +43,10 @@ def drawMaze(maze, window):
             drawRect(window,posX,posY,rectWidth,rectHeight)
 
             # [u, d, l, r]
-            right = elem & r_wall
-            left = elem & l_wall
-            up = elem & u_wall
-            down = elem & d_wall
+            right = listBitwiseAnd(elem, r_wall)
+            left = listBitwiseAnd(elem, l_wall)
+            up = listBitwiseAnd(elem, u_wall)
+            down = listBitwiseAnd(elem, d_wall)
 
             if right == r_wall:
                 drawWall(window, posX, posY, rectWidth, rectHeight, "r")
@@ -59,8 +59,6 @@ def drawMaze(maze, window):
 
             if down == d_wall:
                 drawWall(window, posX, posY, rectWidth, rectHeight, "d")
-
-
 
 def initMaze(maze):
 

@@ -1,14 +1,11 @@
+import utils
+
 #Map building macros
 # u -> up
 # d -> down
 # l -> left
 # r -> right
 # [u, d, l, r]
-
-def listBitwiseOr(c1, c2):
-
-        list = [ i|j for i, j in zip(c1, c2)]
-        return list
 
 no_wall = (0,0,0,0)
 
@@ -62,4 +59,4 @@ test2 = [[ul_wall, u_wall, u_wall, u_wall, ur_wall],
         [l_wall, no_wall, dr_wall, l_wall, r_wall],
         [l_wall, r_wall, ul_wall, no_wall, r_wall]]
 
-print(ur_wall)
+#print(ur_wall)

@@ -1,3 +1,5 @@
+#import imp
+
 from logos import *
 from maps import *
 from utils import *
@@ -87,24 +89,24 @@ def human_game(maze, pos, fin):
                 print(getCost())  # Print Cost
                 addCost()  # Add Cost, initially +1 per move
 
-                printMaze(maze, pos, xsize, ysize)
+                #printMaze(maze, pos, xsize, ysize)
 
                 if i.upper() == 'L':
                     moveleft(pos, maze)
 
                 elif i.upper() == 'R':
-                    moveright(pos, maze, xsize)
+                    moveright(pos, maze)
 
                 elif i.upper() == 'U':
                     moveup(pos, maze)
 
                 elif i.upper() == 'D':
-                    movedown(pos, maze, ysize)
+                    movedown(pos, maze)
                 else:
                     print('INVALID OPTION!\n')
 
     # Win state
-    printMaze(maze, pos, xsize, ysize)
+    #printMaze(maze, pos, xsize, ysize)
     print('YOU WON!!!\n')
     return
 

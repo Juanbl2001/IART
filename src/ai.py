@@ -2,6 +2,7 @@
 # Cost -> Number of moves until it reaches the exit
 # Heuristic -> Manhattan distance
 
+from importlib.resources import path
 from queue import Empty
 from utils import *
 
@@ -31,7 +32,7 @@ def getCost():
     return valueCost
 
 
-def dfs(neighbours, position, destination, visited=None, path=None):
+def dfs(neighbours, position, destination, maze, visited=None, path=None):
 
     if visited is None:
         visited = []
@@ -43,7 +44,7 @@ def dfs(neighbours, position, destination, visited=None, path=None):
 
     if position[0] != destination[0] or position[1] != destination[1]:
 
-        neighbours = check()
+        neighbours = check(position, maze)
 
         for neighbour in neighbours[position]:
             if neighbour not in visited:
@@ -52,7 +53,7 @@ def dfs(neighbours, position, destination, visited=None, path=None):
     return path
 
 
-def bfs_shortest_path(start, goal):
+def bfs(start, goal, maze):
     # keep track of explored nodes
     explored = []
     # keep track of all the paths to be checked
@@ -69,7 +70,7 @@ def bfs_shortest_path(start, goal):
         # get the last node from the path
         node = path[-1]
         if node not in explored:
-            neighbours = check()
+            neighbours = check(node, maze)
             # go through all neighbour nodes, construct a new path and
             # push it into the queue
             for neighbour in neighbours:
@@ -87,19 +88,36 @@ def bfs_shortest_path(start, goal):
     print("No path to destiny exists")
     return 0
 
-def greedy(start,goal):
-    h = manDist(start,goal)
+
+def greedy(start, goal, maze):
+
+    path = []
     explored = []
-    # keep track of all the paths to be checked
-    queue = [start]
-    # return path if start is goal
-    if start == goal:
-        return [goal]
-    while queue:
-        path = queue.pop(0)
-        # get the last node from the path
-        node = path[-1]
+    neighbour = start
 
+    path.append(start)
+    explored.append(start)
 
+    while neighbour != goal:
 
+        neighbours = check(neighbour, maze)
+        h = 9999
 
+        for n in neighbours:
+
+            hAux = manDist(n, goal)
+
+            if hAux < h and (n not in explored):
+                h = hAux
+                neighbour = n
+                explored.append(n)
+
+        if neighbour not in path:
+            path.append(neighbour)
+
+        else:
+            print("Couldn't find goal :(")
+            return 0
+
+    path.append(neighbour)
+    return path

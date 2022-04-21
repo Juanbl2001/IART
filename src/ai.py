@@ -2,6 +2,7 @@
 # Cost -> Number of moves until it reaches the exit
 # Heuristic -> Manhattan distance
 
+from queue import Empty
 from utils import *
 
 valueCost = 0
@@ -85,3 +86,20 @@ def bfs_shortest_path(start, goal):
     # in case there's no path between the 2 nodes
     print("No path to destiny exists")
     return 0
+
+def greedy(start,goal):
+    h = manDist(start,goal)
+    explored = []
+    # keep track of all the paths to be checked
+    queue = [start]
+    # return path if start is goal
+    if start == goal:
+        return [goal]
+    while queue:
+        path = queue.pop(0)
+        # get the last node from the path
+        node = path[-1]
+
+
+
+

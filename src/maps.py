@@ -5,38 +5,42 @@
 # r -> right
 # [u, d, l, r]
 
-no_wall = [0,0,0,0]
+def listBitwiseOr(c1, c2):
 
-r_wall = [0,0,0,1]
+        list = [ i|j for i, j in zip(c1, c2)]
+        return list
 
-l_wall = [0,0,1,0]
+no_wall = (0,0,0,0)
 
-lr_wall = [0,0,1,1]
+r_wall = (0,0,0,1)
 
-d_wall = [0,1,0,0]
+l_wall = (0,0,1,0)
 
-dr_wall = [0,1,0,1]
+d_wall = (0,1,0,0)
 
-dl_wall = [0,1,1,0]
+u_wall = (1,0,0,0)
 
-dlr_wall = [0,1,1,1]
+lr_wall = listBitwiseOr(l_wall,r_wall)
 
-u_wall = [1,0,0,0]
+dr_wall = listBitwiseOr(d_wall,r_wall)
 
-ur_wall = [1,0,0,1]
+dl_wall = listBitwiseOr(d_wall,l_wall)
 
-ul_wall = [1,0,1,0]
+dlr_wall = listBitwiseOr(listBitwiseOr(d_wall,r_wall),r_wall)
 
-ulr_wall = [1,0,1,1]
+ur_wall = listBitwiseOr(u_wall,r_wall)
 
-ud_wall = [1,1,0,0]
+ul_wall = listBitwiseOr(u_wall,l_wall)
 
-udr_wall = [1,1,0,1]
+ulr_wall = listBitwiseOr(listBitwiseOr(u_wall,l_wall),r_wall)
 
-udl_wall = [1,1,1,0]
+ud_wall = listBitwiseOr(u_wall,d_wall)
 
-udlr_wall = [1,1,1,1]
+udr_wall = listBitwiseOr(listBitwiseOr(u_wall,d_wall),r_wall)
 
+udl_wall = listBitwiseOr(listBitwiseOr(u_wall,d_wall),l_wall)
+
+udlr_wall = listBitwiseOr(listBitwiseOr(u_wall,d_wall),listBitwiseOr(l_wall,r_wall))
 
 #test map
 
@@ -57,3 +61,5 @@ test2 = [[ul_wall, u_wall, u_wall, u_wall, ur_wall],
         [l_wall, r_wall, ul_wall, no_wall, r_wall],
         [l_wall, no_wall, dr_wall, l_wall, r_wall],
         [l_wall, r_wall, ul_wall, no_wall, r_wall]]
+
+print(ur_wall)

@@ -1,27 +1,65 @@
 import pygame
 from maps import *
 
+def drawRect(window, posX, posY, rectWidth, rectHeight):
+
+    rectColor = (164, 112, 44)
+
+    pygame.draw.rect(window, rectColor, (posX, posY, rectWidth, rectHeight))
+
+def drawWall(window, posX, posY, rectWidth, rectHeight, side):
+
+    wallColor = (0,0,0)
+
+    if side == "l" or side == "r":
+        wallWidth = 0.9 * rectWidth
+        wallHeight = rectHeight
+    else:
+        wallWidth = rectHeight
+        wallHeight = 0.9 * rectWidth
+
+    if side == "d" or side == "r":
+        posX += (rectWidth - wallWidth)
+        posY += (rectHeight - wallHeight)
+
+
+    pygame.draw.rect(window, wallColor, (posX, posY, wallWidth, wallHeight))
+
+
 def drawMaze(maze, window):
 
     window.fill((255,255,255))
 
-    rectWidth = window.get_width()/len(maze)
-    rectHeight = window.get_height()/len(maze[0])
-    rectColor = (164,112,44)
-
-    wallColor = (0,0,0)
     posX = 0
     posY = 0
 
+    rectWidth = window.get_width() / len(maze)
+    rectHeight = window.get_height() / len(maze[0])
+
     for line in maze:
         for elem in line:
-            if elem == [0,0,0,0]:
-                pygame.draw.rect(window, rectColor, (posX, posY,rectWidth,rectHeight))
-            #elif elem == [0,0,0,1]:
 
-            #elif elem ==
+            #draws rectangle no matter how many walls its drawing after
+            drawRect(window,posX,posY,rectWidth,rectHeight)
 
-            posX += rectWidth
+            # [u, d, l, r]
+            right = elem & r_wall
+            left = elem & l_wall
+            up = elem & u_wall
+            down = elem & d_wall
+
+            if right == r_wall:
+                drawWall(window, posX, posY, rectWidth, rectHeight, "r")
+
+            if left == l_wall:
+                drawWall(window, posX, posY, rectWidth, rectHeight, "l")
+
+            if up == u_wall:
+                drawWall(window, posX, posY, rectWidth, rectHeight, "u")
+
+            if down == d_wall:
+                drawWall(window, posX, posY, rectWidth, rectHeight, "d")
+
 
 
 def initMaze(maze):

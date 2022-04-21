@@ -1,10 +1,12 @@
 #import imp
-from typing import Counter
+
 from logos import *
 from maps import *
-from moves import *
 from utils import *
+from print import *
+from typing import Counter
 from ai import *
+from moves import *
 
 
 def main():

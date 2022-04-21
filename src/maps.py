@@ -1,4 +1,4 @@
-import utils
+from utils import *
 
 #Map building macros
 # u -> up
@@ -7,15 +7,15 @@ import utils
 # r -> right
 # [u, d, l, r]
 
-no_wall = (0,0,0,0)
+no_wall = [0,0,0,0]
 
-r_wall = (0,0,0,1)
+r_wall = [0,0,0,1]
 
-l_wall = (0,0,1,0)
+l_wall = [0,0,1,0]
 
-d_wall = (0,1,0,0)
+d_wall = [0,1,0,0]
 
-u_wall = (1,0,0,0)
+u_wall = [1,0,0,0]
 
 lr_wall = listBitwiseOr(l_wall,r_wall)
 
@@ -57,6 +57,11 @@ test2 = [[ul_wall, u_wall, u_wall, u_wall, ur_wall],
         [l_wall, no_wall, dr_wall, l_wall, r_wall],
         [l_wall, r_wall, ul_wall, no_wall, r_wall],
         [l_wall, no_wall, dr_wall, l_wall, r_wall],
-        [l_wall, r_wall, ul_wall, no_wall, r_wall]]
+        [dl_wall, d_wall, d_wall, d_wall, dr_wall]]
 
+test3 = [[ul_wall, u_wall, u_wall, u_wall, ur_wall],
+        [l_wall, no_wall, no_wall, no_wall, r_wall],
+        [dl_wall, no_wall, no_wall, no_wall, r_wall],
+        [dl_wall, no_wall, no_wall, no_wall, r_wall],
+        [dl_wall, d_wall, d_wall, d_wall, dr_wall]]
 #print(ur_wall)

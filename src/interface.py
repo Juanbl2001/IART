@@ -1,4 +1,5 @@
 import pygame
+from utils import *
 from maps import *
 
 def drawRect(window, posX, posY, rectWidth, rectHeight):
@@ -12,17 +13,18 @@ def drawWall(window, posX, posY, rectWidth, rectHeight, side):
     wallColor = (0,0,0)
 
     if side == "l" or side == "r":
-        wallWidth = 0.9 * rectWidth
+        wallWidth = 0.1 * rectWidth
         wallHeight = rectHeight
     else:
         wallWidth = rectHeight
-        wallHeight = 0.9 * rectWidth
+        wallHeight = 0.1 * rectWidth
 
     if side == "d" or side == "r":
         posX += (rectWidth - wallWidth)
         posY += (rectHeight - wallHeight)
 
-
+    print("Wall Width = ", wallWidth)
+    print("Wall Height = ",wallHeight)
     pygame.draw.rect(window, wallColor, (posX, posY, wallWidth, wallHeight))
 
 
@@ -30,13 +32,16 @@ def drawMaze(maze, window):
 
     window.fill((255,255,255))
 
-    posX = 0
     posY = 0
 
     rectWidth = window.get_width() / len(maze)
     rectHeight = window.get_height() / len(maze[0])
 
+    y = 0
+    count = 0
     for line in maze:
+        posX = 0
+
         for elem in line:
 
             #draws rectangle no matter how many walls its drawing after
@@ -60,12 +65,18 @@ def drawMaze(maze, window):
             if down == d_wall:
                 drawWall(window, posX, posY, rectWidth, rectHeight, "d")
 
+            posX += rectWidth
+            count += 1
+
+
+        posY += rectHeight
+
 def initMaze(maze):
 
     pygame.init()
 
-    width = 600
-    height = 600
+    width = len(maze[0]*100)
+    height = len(maze*100)
 
     window = pygame.display.set_mode([width, height])
 
@@ -79,9 +90,6 @@ def initMaze(maze):
             if event.type == pygame.QUIT:
                 running = False
 
-        # Draw a solid blue circle in the center
-        #pygame.draw.circle(window, (0, 0, 255), (250, 250), 75)
-
         # Flip the display
         pygame.display.flip()
 
@@ -89,4 +97,4 @@ def initMaze(maze):
 
 
 #TESTING
-initMaze(test)
+initMaze(test3)

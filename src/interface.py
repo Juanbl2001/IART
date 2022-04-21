@@ -97,4 +97,4 @@ def initMaze(maze):
 
 
 #TESTING
-initMaze(test3)
+initMaze(test2)

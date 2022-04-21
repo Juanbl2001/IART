@@ -9,6 +9,7 @@ def listBitwiseAnd(c1, c2):
 
 # check for available positions around a certain position (returns list of available positions)
 
+
 def check(pos, maze):
     possibleMoves = []
     if (maze[pos[0]][pos[1]][2] != 1):

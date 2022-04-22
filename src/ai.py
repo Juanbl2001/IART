@@ -3,7 +3,7 @@
 # Heuristic -> Manhattan distance
 
 from importlib.resources import path
-from queue import Empty
+from queue import *
 from utils import *
 
 valueCost = 0
@@ -32,61 +32,46 @@ def getCost():
     return valueCost
 
 
-def dfs(neighbours, position, destination, maze, visited=None, path=None):
+def dfs(position, destination, maze, visited=None, path=None):
 
     if visited is None:
         visited = []
     if path is None:
         path = []
 
-    visited.add(position)
+    visited.append(position)
     path.append(position)
 
-    if position[0] != destination[0] or position[1] != destination[1]:
+    if position[0] == destination[0] and position[1] == destination[1]:
+        print(path)
+        return path
 
-        neighbours = check(position, maze)
+    neighbours = check(position, maze)
 
-        for neighbour in neighbours[position]:
-            if neighbour not in visited:
-                dfs(neighbours, neighbour, visited, path)
-
-    return path
+    for neighbour in neighbours:
+        if neighbour not in visited:
+            dfs(neighbour, destination, maze, visited, path)
+    return None
 
 
 def bfs(start, goal, maze):
-    # keep track of explored nodes
-    explored = []
-    # keep track of all the paths to be checked
-    queue = [start]
 
-    # return path if start is goal
-    if start == goal:
-        return [goal]
+    queue = []
 
-    # keeps looping until all possible paths have been checked
+    queue.append([start])
     while queue:
-        # pop the first path from the queue
+
         path = queue.pop(0)
-        # get the last node from the path
+
         node = path[-1]
-        if node not in explored:
-            neighbours = check(node, maze)
-            # go through all neighbour nodes, construct a new path and
-            # push it into the queue
-            for neighbour in neighbours:
-                new_path = list(path)
-                new_path.append(neighbour)
-                queue.append(new_path)
-                # return path if neighbour is goal
-                if neighbour == goal:
-                    return new_path
 
-            # mark node as explored
-            explored.append(node)
+        if node == goal:
+            return path
 
-    # in case there's no path between the 2 nodes
-    print("No path to destiny exists")
-    return 0
+        for neighbour in check(node, maze):
+            new_path = list(path)
+            new_path.append(neighbour)
+            queue.append(new_path)
 
 
 def greedy(start, goal, maze):
@@ -119,5 +104,4 @@ def greedy(start, goal, maze):
             print("Couldn't find goal :(")
             return 0
 
-    path.append(neighbour)
     return path

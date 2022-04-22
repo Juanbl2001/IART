@@ -11,21 +11,15 @@ def listBitwiseAnd(c1, c2):
 
 
 def check(pos, maze):
-
     possibleMoves = []
-
     if (maze[pos[0]][pos[1]][2] != 1):
-        possibleMoves.append([pos[0], pos[1] - 1])
-
+        possibleMoves.append([pos[0], pos[1]-1])
     if (maze[pos[0]][pos[1]][3] != 1):
-        possibleMoves.append([pos[0], pos[1] + 1])
-
+        possibleMoves.append([pos[0], pos[1]+1])
     if (maze[pos[0]][pos[1]][0] != 1):
-        possibleMoves.append([pos[0] - 1, pos[1]])
-
+        possibleMoves.append([pos[0]-1, pos[1]])
     if (maze[pos[0]][pos[1]][1] != 1):
-        possibleMoves.append([pos[0] + 1, pos[1]])
-
+        possibleMoves.append([pos[0]+1, pos[1]])
     return possibleMoves
 
 

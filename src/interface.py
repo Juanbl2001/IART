@@ -2,15 +2,23 @@ import pygame
 from utils import *
 from maps import *
 
+# set up pygame window
+WIDTH = 1000
+HEIGHT = 1000
+FPS = 60
+
+# Define colours
+WHITE = (255, 255, 255)
+GREEN = (0, 51, 0)
+BLUE = (0, 51, 204)
+YELLOW = (255 ,255 ,0)
+RED = (204, 0, 0)
+
 def drawRect(window, posX, posY, rectWidth, rectHeight):
 
-    rectColor = (18, 91, 13)
-
-    pygame.draw.rect(window, rectColor, (posX, posY, rectWidth, rectHeight))
+    pygame.draw.rect(window, WHITE, (posX, posY, rectWidth, rectHeight))
 
 def drawWall(window, posX, posY, rectWidth, rectHeight, side):
-
-    wallColor = (0,0,0)
 
     ratio = 0.05
     if side == "l" or side == "r":
@@ -26,23 +34,21 @@ def drawWall(window, posX, posY, rectWidth, rectHeight, side):
 
     print("Wall Width = ", wallWidth)
     print("Wall Height = ",wallHeight)
-    pygame.draw.rect(window, wallColor, (posX, posY, wallWidth, wallHeight))
+    pygame.draw.rect(window, GREEN, (posX, posY, wallWidth, wallHeight))
 
 
 def drawAgent(window, x, y):
 
-    agentColor = (226,208,48)
     if window.get_width() < window.get_height():
         aux = window.get_width()
     else:
         aux = window.get_height()
 
     radius = 0.05 * aux
-    pygame.draw.circle(window,agentColor,(x,y),radius)
+    pygame.draw.circle(window,BLUE,(x,y),radius)
 
 def drawExit(maze, window, exit, rectWidth, rectHeight):
 
-    exitColor = (222,1,1)
     ratio = 0.05
 
     # check which side is the exit
@@ -61,7 +67,7 @@ def drawExit(maze, window, exit, rectWidth, rectHeight):
         x = rectWidth * exit[0]
         y = rectHeight * exit[1]
 
-    pygame.draw.rect(window,exitColor,(x,y,width,height))
+    pygame.draw.rect(window,RED,(x,y,width,height))
 
 def drawMaze(maze, window, rectWidth, rectHeight, goal):
 
@@ -108,6 +114,9 @@ def drawMaze(maze, window, rectWidth, rectHeight, goal):
 def initMaze(maze,goal):
 
     pygame.init()
+    pygame.mixer.init()
+    pygame.display.set_caption("Python Maze Generator")
+    clock = pygame.time.Clock()
 
     width = len(maze[0]*100)
     height = len(maze*100)
@@ -122,7 +131,7 @@ def initMaze(maze,goal):
 
     running = True
     while running:
-
+        clock.tick(FPS)
         # Did the user click the window close button?
         for event in pygame.event.get():
             if event.type == pygame.QUIT:

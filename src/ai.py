@@ -113,8 +113,6 @@ def greedy(start, goal, maze):
     queue.append(["U"])
     queue.append(["D"])
 
-    
-
     while queue:
         heuristic = 9999
         for i in queue:
@@ -136,28 +134,3 @@ def greedy(start, goal, maze):
             newSeq = list(bestSeq)
             newSeq.append(movDir)
             queue.append(newSeq)
-
-
-def getRight(pos,maze):
-    if(maze[pos[0]][pos[1]][3]==0):
-        return [pos[0],pos[1]+1]
-    else:
-        return [pos[0],pos[1]]
-
-def getLeft(pos,maze):
-    if(maze[pos[0]][pos[1]][2]==0):
-        return [pos[0],pos[1]-1]
-    else:
-        return [pos[0],pos[1]]
-
-def getUp(pos,maze):
-    if(maze[pos[0]][pos[1]][0]==0):
-        return [pos[0]-1,pos[1]]
-    else:
-        return [pos[0],pos[1]]
-
-def getDown(pos,maze):
-    if(maze[pos[0]][pos[1]][1]==0):
-        return [pos[0]+1,pos[1]]
-    else:
-        return [pos[0],pos[1]]

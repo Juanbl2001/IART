@@ -2,8 +2,12 @@
 # Cost -> Number of moves until it reaches the exit
 # Heuristic -> Manhattan distance
 
+from cmath import sqrt
+from curses import nl
 from importlib.resources import path
+from lib2to3.pgen2.token import NEWLINE
 from queue import *
+from time import sleep
 from moves import *
 from utils import *
 import math
@@ -13,9 +17,7 @@ valueCost = 0
 
 def linDist(robotPos, finalPos):
 
-    h = ((robotPos[0] - finalPos[0]) ^ 2 +
-         (robotPos[1] - finalPos[1]) ^ 2) ^ 0.5
-
+    h = sqrt((abs(robotPos[0] - finalPos[0]))^2 + (abs(robotPos[0] - finalPos[0]))^2 ^ 2)
     return h
 
 
@@ -105,32 +107,78 @@ def newBfs(start, goal, maze):
             queue.append(newSeq)
 
 
-def greedy(start, goal, maze):
+def greedy(start, goal, maze, sizeOfAnswer):
 
     queue = []
     queue.append(["L"])
     queue.append(["R"])
     queue.append(["U"])
     queue.append(["D"])
+    count = 0
 
     while queue:
-        heuristic = 9999
-        for i in queue:
+        count+=1
+        heuristic = 999.0
+        for i in range(len(queue)):
             aux = [start[0], start[1]] #so the initial Position doesn't get altered
-            lastPos = move(i, aux, goal, maze) #get last position achievable with that sequence
-            auxHeuristic = manDist(lastPos, goal) #calculate the heuristic from that last position achieved
-            if(auxHeuristic < heuristic): 
+            lastPos = move(queue[i], aux, goal, maze) #get last position achievable with that sequence
+            auxHeuristic = eucDist(lastPos, goal) #calculate the heuristic from that last position achieved
+            if(auxHeuristic <= heuristic):
                 heuristic = auxHeuristic
-                bestSeq = i
+                bestSeq = queue[i]
                 bestPos = lastPos
-        
+            
         queue.remove(bestSeq)
-        
-        aux = [start[0], start[1]]
+
+        #checks depth
         if goal == bestPos:
+            print(count)
+            print("In greedy"+ str(bestSeq))
             return bestSeq
 
-        for movDir in ["L", "R", "U", "D"]:
-            newSeq = list(bestSeq)
-            newSeq.append(movDir)
-            queue.append(newSeq)
+        if(len(bestSeq) < sizeOfAnswer):
+            for movDir in ["L", "R", "U", "D"]:
+                newSeq = list(bestSeq)
+                newSeq.append(movDir)
+                queue.append(newSeq)
+
+
+
+def ucs(start, goal, maze, sizeOfAnswer):
+
+    queue = []
+    queue.append(["L"])
+    queue.append(["R"])
+    queue.append(["U"])
+    queue.append(["D"])
+    count = 0
+
+    while queue:
+        count+=1
+        heuristic = 999.0
+        for i in range(len(queue)):
+            aux = [start[0], start[1]] #so the initial Position doesn't get altered
+            lastPos = move(queue[i], aux, goal, maze) #get last position achievable with that sequence
+
+            auxHeuristic = eucDist(lastPos, goal) #calculate the heuristic from that last position achieved
+            if(auxHeuristic <= heuristic):
+                if(auxHeuristic == heuristic and len(queue[i]) > len(bestSeq) and i != 0):
+                    continue
+                else:
+                    heuristic = auxHeuristic
+                    bestSeq = queue[i]
+                    bestPos = lastPos
+            
+        queue.remove(bestSeq)
+
+        #checks depth
+        if goal == bestPos:
+            print(count)
+            print("In ucs"+ str(bestSeq))
+            return bestSeq
+
+        if(len(bestSeq) < sizeOfAnswer):
+            for movDir in ["L", "R", "U", "D"]:
+                newSeq = list(bestSeq)
+                newSeq.append(movDir)
+                queue.append(newSeq)

@@ -5,9 +5,9 @@
 from importlib.resources import path
 from queue import *
 from utils import *
+import math
 
 valueCost = 0
-
 
 def linDist(robotPos, finalPos):
 
@@ -23,10 +23,13 @@ def manDist(robotPos, finalPos):
 
     return h
 
-
 def addCost():
     valueCost += 1
 
+def eucDist(robotPos, finalPos):
+
+    h = math.dist(robotPos, finalPos)
+    return h
 
 def getCost():
     return valueCost

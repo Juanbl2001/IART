@@ -44,3 +44,29 @@ def get_ysize(maze):
 def printlogo(logo):
     for i in range(len(logo)):
         print(*logo[i])
+
+
+
+def getRight(pos,maze):
+    if(maze[pos[0]][pos[1]][3]==0):
+        return [pos[0],pos[1]+1]
+    else:
+        return [pos[0],pos[1]]
+
+def getLeft(pos,maze):
+    if(maze[pos[0]][pos[1]][2]==0):
+        return [pos[0],pos[1]-1]
+    else:
+        return [pos[0],pos[1]]
+
+def getUp(pos,maze):
+    if(maze[pos[0]][pos[1]][0]==0):
+        return [pos[0]-1,pos[1]]
+    else:
+        return [pos[0],pos[1]]
+
+def getDown(pos,maze):
+    if(maze[pos[0]][pos[1]][1]==0):
+        return [pos[0]+1,pos[1]]
+    else:
+        return [pos[0],pos[1]]

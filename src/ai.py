@@ -115,9 +115,6 @@ def greedy(start, goal, maze, sizeOfAnswer):
     queue.append(["U"])
     queue.append(["D"])
 
-    count = 0
-    
-
     while queue:
         count+=1
         heuristic = 999.0
@@ -142,34 +139,7 @@ def greedy(start, goal, maze, sizeOfAnswer):
             print(bestSeq)
             return bestSeq
 
-        #prevents adding bigger than sizeOfAnswer sequences as they will be useless
-        if(len(bestSeq)<sizeOfAnswer):
-            for movDir in ["L", "R", "U", "D"]:
-                newSeq = list(bestSeq)
-                newSeq.append(movDir)
-                queue.append(newSeq)
-
-
-def getRight(pos,maze):
-    if(maze[pos[0]][pos[1]][3]==0):
-        return [pos[0],pos[1]+1]
-    else:
-        return [pos[0],pos[1]]
-
-def getLeft(pos,maze):
-    if(maze[pos[0]][pos[1]][2]==0):
-        return [pos[0],pos[1]-1]
-    else:
-        return [pos[0],pos[1]]
-
-def getUp(pos,maze):
-    if(maze[pos[0]][pos[1]][0]==0):
-        return [pos[0]-1,pos[1]]
-    else:
-        return [pos[0],pos[1]]
-
-def getDown(pos,maze):
-    if(maze[pos[0]][pos[1]][1]==0):
-        return [pos[0]+1,pos[1]]
-    else:
-        return [pos[0],pos[1]]
+        for movDir in ["L", "R", "U", "D"]:
+            newSeq = list(bestSeq)
+            newSeq.append(movDir)
+            queue.append(newSeq)

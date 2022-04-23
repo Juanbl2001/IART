@@ -110,4 +110,8 @@ def human_game(maze, pos, fin):
     return
 
 
-main()
+greedy([4, 0], [0, 4], [[ulr_wall, ul_wall, u_wall, ur_wall, ulr_wall],
+      [l_wall, no_wall, ur_wall, l_wall, dr_wall],
+      [l_wall, r_wall, dl_wall, no_wall, ur_wall],
+      [l_wall, no_wall, u_wall, no_wall, r_wall],
+      [dl_wall, d_wall, d_wall, d_wall, dr_wall]],4)

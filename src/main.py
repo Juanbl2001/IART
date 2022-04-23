@@ -44,7 +44,7 @@ def human_mode():
             'Choose map: \n 1 => test \n 2 => ??? \n 3 => ??? \n 4 => ??? \n 5 => Exit \n ->')
 
         if eval(maze_sel) == 1:
-            human_game(test, testInit, testGOal)
+            human_game(test, testInit, testGoal)
 
         elif eval(maze_sel) == 2:
             human_game(test, testInit, testGoal)

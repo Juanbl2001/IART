@@ -28,8 +28,12 @@ def movedown(pos, maze):
 
 def move(seq, pos, goal, maze):
 
-    for j in range(0, 20):
+    if seq == []:
+        return pos
+
+    for j in range(0, 10):
         for i in seq:
+
             if i.upper() == 'L':
                 moveleft(pos, maze)
 

@@ -40,46 +40,34 @@ def getCost():
     return valueCost
 
 
-def dfs(position, destination, maze, visited=None, path=None):
+def newDfs(start, goal, maze, sizeOfAnswer, seq=None, visited=None, limit=None):
+
+    if seq is None:
+        seq = []
 
     if visited is None:
         visited = []
-    if path is None:
-        path = []
 
-    visited.append(position)
-    path.append(position)
+    if limit is None:
+        limit = 0
 
-    if position[0] == destination[0] and position[1] == destination[1]:
-        print(path)
-        return path
+    if limit <= sizeOfAnswer:
 
-    neighbours = check(position, maze)
+        if seq != []:
+            visited.append([seq])
 
-    for neighbour in neighbours:
-        if neighbour not in visited:
-            dfs(neighbour, destination, maze, visited, path)
-    return None
+        aux = [start[0], start[1]]
 
+        if goal == move(seq, aux, goal, maze) and len(seq) == sizeOfAnswer:
+            print(seq)
+            return seq
 
-def bfs(start, goal, maze):
-
-    queue = []
-
-    queue.append([start])
-    while queue:
-
-        path = queue.pop(0)
-
-        node = path[-1]
-
-        if node == goal:
-            return path
-
-        for neighbour in check(node, maze):
-            new_path = list(path)
-            new_path.append(neighbour)
-            queue.append(new_path)
+        for movDir in ["L", "R", "U", "D"]:
+            newSeq = list(seq)
+            newSeq.append(movDir)
+            if newSeq not in visited:
+                newDfs(start, goal, maze, sizeOfAnswer,
+                       newSeq, visited, (limit+1))
 
 
 def newBfs(start, goal, maze):
@@ -93,8 +81,8 @@ def newBfs(start, goal, maze):
     while queue:
 
         seq = queue.pop(0)
-        # print(seq)
         aux = [start[0], start[1]]
+
         if goal == move(seq, aux, goal, maze):
             return seq
 

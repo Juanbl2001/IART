@@ -80,10 +80,65 @@ test4 = [[ul_wall, u_wall, ur_wall],
 # (X, Y, DIRECTION ->
 testGoal4 = [2, 2, "d"]
 
+Start = [4, 0]
+Goal = [0, 4]
+
 p1 = [[ulr_wall, ul_wall, u_wall, ur_wall, ulr_wall],
       [l_wall, no_wall, ur_wall, l_wall, dr_wall],
       [l_wall, r_wall, dl_wall, no_wall, ur_wall],
       [l_wall, no_wall, u_wall, no_wall, r_wall],
       [dl_wall, d_wall, d_wall, d_wall, dr_wall]]
-p1Start = [4, 0]
-p1Goal = [0, 4]
+
+p2 = [[udl_wall, ud_wall, ud_wall, u_wall, udr_wall],
+      [ulr_wall, udl_wall, u_wall, no_wall, ur_wall],
+      [l_wall, ur_wall, l_wall, r_wall, lr_wall],
+      [l_wall, no_wall, d_wall, no_wall, dr_wall],
+      [dl_wall, d_wall, ud_wall, d_wall, udr_wall]]
+
+p3 = [[ul_wall, u_wall, u_wall, ur_wall, ulr_wall],
+      [l_wall, r_wall, dl_wall, no_wall, r_wall],
+      [l_wall, no_wall, udr_wall, l_wall, r_wall],
+      [l_wall, no_wall, udr_wall, l_wall, r_wall],
+      [dlr_wall, dl_wall, ud_wall, d_wall, dr_wall]]
+
+p4 = [[ulr_wall, udl_wall, u_wall, ud_wall, udr_wall],
+      [l_wall, ur_wall, dl_wall, u_wall, ur_wall],
+      [lr_wall, d_wall, u_wall, r_wall, dlr_wall],
+      [l_wall, u_wall, no_wall, no_wall, ur_wall],
+      [dl_wall, d_wall, d_wall, d_wall, dr_wall]]
+
+p5 = [[ulr_wall, ul_wall, u_wall, ur_wall, ulr_wall],
+      [l_wall, d_wall, no_wall, d_wall, r_wall],
+      [lr_wall, ulr_wall, l_wall, u_wall, dr_wall],
+      [l_wall, r_wall, l_wall, no_wall, ur_wall],
+      [dl_wall, dr_wall, dl_wall, d_wall, dr_wall]]
+
+p6 = [[udl_wall, ud_wall, ud_wall, u_wall, udr_wall],
+      [ulr_wall, udl_wall, u_wall, no_wall, ur_wall],
+      [l_wall, ur_wall, l_wall, r_wall, lr_wall],
+      [l_wall, no_wall, d_wall, no_wall, dr_wall],
+      [dl_wall, d_wall, ud_wall, d_wall, udr_wall]]
+
+p7 = [[udl_wall, ud_wall, ud_wall, u_wall, udr_wall],
+      [ulr_wall, udl_wall, u_wall, no_wall, ur_wall],
+      [l_wall, ur_wall, l_wall, r_wall, lr_wall],
+      [l_wall, no_wall, d_wall, no_wall, dr_wall],
+      [dl_wall, d_wall, ud_wall, d_wall, udr_wall]]
+
+p8 = [[udl_wall, ud_wall, ud_wall, u_wall, udr_wall],
+      [ulr_wall, udl_wall, u_wall, no_wall, ur_wall],
+      [l_wall, ur_wall, l_wall, r_wall, lr_wall],
+      [l_wall, no_wall, d_wall, no_wall, dr_wall],
+      [dl_wall, d_wall, ud_wall, d_wall, udr_wall]]
+
+p9 = [[udl_wall, ud_wall, ud_wall, u_wall, udr_wall],
+      [ulr_wall, udl_wall, u_wall, no_wall, ur_wall],
+      [l_wall, ur_wall, l_wall, r_wall, lr_wall],
+      [l_wall, no_wall, d_wall, no_wall, dr_wall],
+      [dl_wall, d_wall, ud_wall, d_wall, udr_wall]]
+
+p10 = [[udl_wall, ud_wall, ud_wall, u_wall, udr_wall],
+       [ulr_wall, udl_wall, u_wall, no_wall, ur_wall],
+       [l_wall, ur_wall, l_wall, r_wall, lr_wall],
+       [l_wall, no_wall, d_wall, no_wall, dr_wall],
+       [dl_wall, d_wall, ud_wall, d_wall, udr_wall]]

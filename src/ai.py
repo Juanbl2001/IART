@@ -61,7 +61,8 @@ def dfs(position, destination, maze, visited=None, path=None):
             dfs(neighbour, destination, maze, visited, path)
     return None
 
-
+"""
+#Antigo BFS
 def bfs(start, goal, maze):
 
     queue = []
@@ -80,7 +81,7 @@ def bfs(start, goal, maze):
             new_path = list(path)
             new_path.append(neighbour)
             queue.append(new_path)
-
+"""
 
 def newBfs(start, goal, maze):
 
@@ -106,32 +107,57 @@ def newBfs(start, goal, maze):
 
 def greedy(start, goal, maze):
 
-    path = []
-    explored = []
-    pos = start
+    queue = []
+    queue.append(["L"])
+    queue.append(["R"])
+    queue.append(["U"])
+    queue.append(["D"])
 
-    path.append(start)
-    explored.append(start)
+    
 
-    while pos != goal:
+    while queue:
+        heuristic = 9999
+        for i in queue:
+            aux = [start[0], start[1]] #so the initial Position doesn't get altered
+            lastPos = move(i, aux, goal, maze) #get last position achievable with that sequence
+            auxHeuristic = manDist(lastPos, goal) #calculate the heuristic from that last position achieved
+            if(auxHeuristic < heuristic): 
+                heuristic = auxHeuristic
+                bestSeq = i
+                bestPos = lastPos
+        
+        queue.remove(bestSeq)
+        
+        aux = [start[0], start[1]]
+        if goal == bestPos:
+            return bestSeq
 
-        neighbours = check(pos, maze)
-        h = 9999
+        for movDir in ["L", "R", "U", "D"]:
+            newSeq = list(bestSeq)
+            newSeq.append(movDir)
+            queue.append(newSeq)
 
-        for n in neighbours:
 
-            hAux = manDist(n, goal)
+def getRight(pos,maze):
+    if(maze[pos[0]][pos[1]][3]==0):
+        return [pos[0],pos[1]+1]
+    else:
+        return [pos[0],pos[1]]
 
-            if hAux < h and (n not in explored):
-                h = hAux
-                pos = n
-                explored.append(n)
+def getLeft(pos,maze):
+    if(maze[pos[0]][pos[1]][2]==0):
+        return [pos[0],pos[1]-1]
+    else:
+        return [pos[0],pos[1]]
 
-        if pos not in path:
-            path.append(pos)
+def getUp(pos,maze):
+    if(maze[pos[0]][pos[1]][0]==0):
+        return [pos[0]-1,pos[1]]
+    else:
+        return [pos[0],pos[1]]
 
-        else:
-            print("Couldn't find goal :(")
-            return 0
-
-    return path
+def getDown(pos,maze):
+    if(maze[pos[0]][pos[1]][1]==0):
+        return [pos[0]+1,pos[1]]
+    else:
+        return [pos[0],pos[1]]

@@ -78,14 +78,14 @@ def greedy(start, goal, maze):
 
     path = []
     explored = []
-    neighbour = start
+    pos = start
 
     path.append(start)
     explored.append(start)
 
-    while neighbour != goal:
+    while pos != goal:
 
-        neighbours = check(neighbour, maze)
+        neighbours = check(pos, maze)
         h = 9999
 
         for n in neighbours:
@@ -94,11 +94,11 @@ def greedy(start, goal, maze):
 
             if hAux < h and (n not in explored):
                 h = hAux
-                neighbour = n
+                pos = n
                 explored.append(n)
 
-        if neighbour not in path:
-            path.append(neighbour)
+        if pos not in path:
+            path.append(pos)
 
         else:
             print("Couldn't find goal :(")

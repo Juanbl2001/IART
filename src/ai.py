@@ -114,6 +114,44 @@ def greedy(start, goal, maze, sizeOfAnswer):
     queue.append(["R"])
     queue.append(["U"])
     queue.append(["D"])
+    count = 0
+
+    while queue:
+        count+=1
+        heuristic = 999.0
+        for i in range(len(queue)):
+            aux = [start[0], start[1]] #so the initial Position doesn't get altered
+            lastPos = move(queue[i], aux, goal, maze) #get last position achievable with that sequence
+            auxHeuristic = eucDist(lastPos, goal) #calculate the heuristic from that last position achieved
+            if(auxHeuristic <= heuristic):
+                heuristic = auxHeuristic
+                bestSeq = queue[i]
+                bestPos = lastPos
+            
+        queue.remove(bestSeq)
+
+        #checks depth
+        if goal == bestPos:
+            print(count)
+            print("In greedy"+ str(bestSeq))
+            return bestSeq
+
+        if(len(bestSeq) < sizeOfAnswer):
+            for movDir in ["L", "R", "U", "D"]:
+                newSeq = list(bestSeq)
+                newSeq.append(movDir)
+                queue.append(newSeq)
+
+
+
+def ucs(start, goal, maze, sizeOfAnswer):
+
+    queue = []
+    queue.append(["L"])
+    queue.append(["R"])
+    queue.append(["U"])
+    queue.append(["D"])
+    count = 0
 
     while queue:
         count+=1
@@ -136,10 +174,11 @@ def greedy(start, goal, maze, sizeOfAnswer):
         #checks depth
         if goal == bestPos:
             print(count)
-            print(bestSeq)
+            print("In ucs"+ str(bestSeq))
             return bestSeq
 
-        for movDir in ["L", "R", "U", "D"]:
-            newSeq = list(bestSeq)
-            newSeq.append(movDir)
-            queue.append(newSeq)
+        if(len(bestSeq) < sizeOfAnswer):
+            for movDir in ["L", "R", "U", "D"]:
+                newSeq = list(bestSeq)
+                newSeq.append(movDir)
+                queue.append(newSeq)

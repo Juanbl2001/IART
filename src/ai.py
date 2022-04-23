@@ -147,38 +147,38 @@ def greedy(start, goal, maze, sizeOfAnswer):
 def ucs(start, goal, maze, sizeOfAnswer):
 
     queue = []
-    queue.append(["L"])
-    queue.append(["R"])
-    queue.append(["U"])
-    queue.append(["D"])
+    queue.append(["L",-1,[0,0]])
+    queue.append(["R",-1,[0,0]])
+    queue.append(["U",-1,[0,0]])
+    queue.append(["D",-1,[0,0]])
     count = 0
 
+    #by storing the value in the queue we dont need to re-search the last position of each value each time
+    #time saved from 0.8s -> 0.004s
     while queue:
         count+=1
-        heuristic = 999.0
+        bestHeuristic = 999.0
         for i in range(len(queue)):
             aux = [start[0], start[1]] #so the initial Position doesn't get altered
-            lastPos = move(queue[i], aux, goal, maze) #get last position achievable with that sequence
-
-            auxHeuristic = eucDist(lastPos, goal) #calculate the heuristic from that last position achieved
-            if(auxHeuristic <= heuristic):
-                if(auxHeuristic == heuristic and len(queue[i]) > len(bestSeq) and i != 0):
+            if(queue[i][1]==-1):
+                queue[i][2] = move(queue[i][0], aux, goal, maze) #get last position achievable with that sequence
+                queue[i][1] = eucDist(queue[i][2], goal) #get heuristic
+            if(queue[i][1] <= bestHeuristic):
+                if(queue[i][1] == bestHeuristic and len(queue[i][0]) > len(bestVal[0]) and i != 0):
                     continue
                 else:
-                    heuristic = auxHeuristic
-                    bestSeq = queue[i]
-                    bestPos = lastPos
-            
-        queue.remove(bestSeq)
+                    bestVal = queue[i]
+                    bestHeuristic = queue[i][1]
+
+        queue.remove(bestVal)
 
         #checks depth
-        if goal == bestPos:
+        if goal == bestVal[2]:
             print(count)
-            print("In ucs"+ str(bestSeq))
-            return bestSeq
+            print("In ucs"+ str(bestVal))
+            return bestVal[0]
 
-        if(len(bestSeq) < sizeOfAnswer):
-            for movDir in ["L", "R", "U", "D"]:
-                newSeq = list(bestSeq)
-                newSeq.append(movDir)
+        if(len(bestVal[0]) < sizeOfAnswer):
+            for movDir in "LDUR":
+                newSeq = [bestVal[0]+movDir,-1,[0,0]]
                 queue.append(newSeq)

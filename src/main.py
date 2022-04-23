@@ -1,11 +1,13 @@
 #import imp
 
+from tracemalloc import start
 from logos import *
 from maps import *
 from utils import *
 from typing import Counter
 from ai import *
 from moves import *
+from time import *
 
 
 def main():
@@ -109,15 +111,24 @@ def human_game(maze, pos, fin):
     print('YOU WON!!!\n')
     return
 
-
+start_ucs = time()
 ucs([4, 0], [0, 4], [[ulr_wall, ul_wall, u_wall, ur_wall, ulr_wall],
       [l_wall, no_wall, ur_wall, l_wall, dr_wall],
       [l_wall, r_wall, dl_wall, no_wall, ur_wall],
       [l_wall, no_wall, u_wall, no_wall, r_wall],
       [dl_wall, d_wall, d_wall, d_wall, dr_wall]],4)
 
+end_ucs=time()
+print(end_ucs-start_ucs)
+
+start_greedy = time()
+
 greedy([4, 0], [0, 4], [[ulr_wall, ul_wall, u_wall, ur_wall, ulr_wall],
       [l_wall, no_wall, ur_wall, l_wall, dr_wall],
       [l_wall, r_wall, dl_wall, no_wall, ur_wall],
       [l_wall, no_wall, u_wall, no_wall, r_wall],
       [dl_wall, d_wall, d_wall, d_wall, dr_wall]],4)
+
+end_greedy = time()
+
+print(end_greedy-start_greedy)

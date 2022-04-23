@@ -119,7 +119,7 @@ ucs([4, 0], [0, 4], [[ulr_wall, ul_wall, u_wall, ur_wall, ulr_wall],
       [dl_wall, d_wall, d_wall, d_wall, dr_wall]],4)
 
 end_ucs=time()
-print(end_ucs-start_ucs)
+print("Time in UCS: " + str(end_ucs-start_ucs))
 
 start_greedy = time()
 
@@ -131,4 +131,4 @@ greedy([4, 0], [0, 4], [[ulr_wall, ul_wall, u_wall, ur_wall, ulr_wall],
 
 end_greedy = time()
 
-print(end_greedy-start_greedy)
+print("Time in Greedy: " + str(end_greedy-start_greedy))

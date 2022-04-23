@@ -110,61 +110,20 @@ def newBfs(start, goal, maze):
 def greedy(start, goal, maze, sizeOfAnswer):
 
     queue = []
-    queue.append(["L"])
-    queue.append(["R"])
-    queue.append(["U"])
-    queue.append(["D"])
-    count = 0
-
-    while queue:
-        count+=1
-        heuristic = 999.0
-        for i in range(len(queue)):
-            aux = [start[0], start[1]] #so the initial Position doesn't get altered
-            lastPos = move(queue[i], aux, goal, maze) #get last position achievable with that sequence
-            auxHeuristic = eucDist(lastPos, goal) #calculate the heuristic from that last position achieved
-            if(auxHeuristic <= heuristic):
-                heuristic = auxHeuristic
-                bestSeq = queue[i]
-                bestPos = lastPos
-            
-        queue.remove(bestSeq)
-
-        #checks depth
-        if goal == bestPos:
-            print(count)
-            print("In greedy"+ str(bestSeq))
-            return bestSeq
-
-        if(len(bestSeq) < sizeOfAnswer):
-            for movDir in ["L", "R", "U", "D"]:
-                newSeq = list(bestSeq)
-                newSeq.append(movDir)
-                queue.append(newSeq)
-
-
-
-def ucs(start, goal, maze, sizeOfAnswer):
-
-    queue = []
-    queue.append(["L",-1,[0,0]])
-    queue.append(["R",-1,[0,0]])
-    queue.append(["U",-1,[0,0]])
-    queue.append(["D",-1,[0,0]])
+    queue.append(setUp("L",start,goal,maze))
+    queue.append(setUp("R",start,goal,maze))
+    queue.append(setUp("U",start,goal,maze))
+    queue.append(setUp("D",start,goal,maze))
     count = 0
 
     #by storing the value in the queue we dont need to re-search the last position of each value each time
     #time saved from 0.8s -> 0.004s
     while queue:
-        count+=1
         bestHeuristic = 999.0
         for i in range(len(queue)):
-            aux = [start[0], start[1]] #so the initial Position doesn't get altered
-            if(queue[i][1]==-1):
-                queue[i][2] = move(queue[i][0], aux, goal, maze) #get last position achievable with that sequence
-                queue[i][1] = eucDist(queue[i][2], goal) #get heuristic
+            count+=1
             if(queue[i][1] <= bestHeuristic):
-                if(queue[i][1] == bestHeuristic and len(queue[i][0]) > len(bestVal[0]) and i != 0):
+                if(queue[i][1] == bestHeuristic):
                     continue
                 else:
                     bestVal = queue[i]
@@ -174,11 +133,53 @@ def ucs(start, goal, maze, sizeOfAnswer):
 
         #checks depth
         if goal == bestVal[2]:
-            print(count)
-            print("In ucs"+ str(bestVal))
+            print("\nCount in Greedy: "+str(count))
+            print("Value Greedy: "+ str(bestVal[0]))
             return bestVal[0]
 
         if(len(bestVal[0]) < sizeOfAnswer):
             for movDir in "LDUR":
-                newSeq = [bestVal[0]+movDir,-1,[0,0]]
+                newSeq = setUp(bestVal[0]+movDir,start,goal,maze)
                 queue.append(newSeq)
+
+
+
+def ucs(start, goal, maze, sizeOfAnswer):
+
+    queue = []
+    queue.append(setUp("L",start,goal,maze))
+    queue.append(setUp("R",start,goal,maze))
+    queue.append(setUp("U",start,goal,maze))
+    queue.append(setUp("D",start,goal,maze))
+    count = 0
+
+    #by storing the value in the queue we dont need to re-search the last position of each value each time
+    #time saved from 0.8s -> 0.004s
+    while queue:
+        bestHeuristic = 999.0
+        for i in range(len(queue)):
+            count+=1
+            if(queue[i][1] <= bestHeuristic):
+                if(queue[i][1] == bestHeuristic and len(queue[i][0]) > len(bestVal[0])):
+                    continue
+                else:
+                    bestVal = queue[i]
+                    bestHeuristic = queue[i][1]
+
+        queue.remove(bestVal)
+
+        #checks depth
+        if goal == bestVal[2]:
+            print("\nCount in UCS: "+str(count))
+            print("Value UCS: "+ str(bestVal[0]))
+            return bestVal[0]
+
+        if(len(bestVal[0]) < sizeOfAnswer):
+            for movDir in "LDUR":
+                newSeq = setUp(bestVal[0]+movDir,start,goal,maze)
+                queue.append(newSeq)
+
+def setUp(seq,start,goal,maze):
+    aux = [start[0], start[1]]
+    pos = move(seq, aux, goal, maze) #get last position achievable with that sequence
+    return [seq,eucDist(pos, goal),pos]

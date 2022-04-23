@@ -4,10 +4,12 @@
 
 from importlib.resources import path
 from queue import *
+from moves import *
 from utils import *
 import math
 
 valueCost = 0
+
 
 def linDist(robotPos, finalPos):
 
@@ -23,13 +25,16 @@ def manDist(robotPos, finalPos):
 
     return h
 
+
 def addCost():
     valueCost += 1
+
 
 def eucDist(robotPos, finalPos):
 
     h = math.dist(robotPos, finalPos)
     return h
+
 
 def getCost():
     return valueCost
@@ -75,6 +80,28 @@ def bfs(start, goal, maze):
             new_path = list(path)
             new_path.append(neighbour)
             queue.append(new_path)
+
+
+def newBfs(start, goal, maze):
+
+    queue = []
+    queue.append(["L"])
+    queue.append(["R"])
+    queue.append(["U"])
+    queue.append(["D"])
+
+    while queue:
+
+        seq = queue.pop(0)
+        # print(seq)
+        aux = [start[0], start[1]]
+        if goal == move(seq, aux, goal, maze):
+            return seq
+
+        for movDir in ["L", "R", "U", "D"]:
+            newSeq = list(seq)
+            newSeq.append(movDir)
+            queue.append(newSeq)
 
 
 def greedy(start, goal, maze):

@@ -24,3 +24,24 @@ def movedown(pos, maze):
         pos[0] += 1
         return 1
     return 0
+
+
+def move(seq, pos, goal, maze):
+
+    for j in range(0, 20):
+        for i in seq:
+            if i.upper() == 'L':
+                moveleft(pos, maze)
+
+            elif i.upper() == 'R':
+                moveright(pos, maze)
+
+            elif i.upper() == 'U':
+                moveup(pos, maze)
+
+            elif i.upper() == 'D':
+                movedown(pos, maze)
+
+            if pos == goal:
+                return pos
+    return pos

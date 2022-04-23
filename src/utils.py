@@ -1,3 +1,6 @@
+import itertools
+
+
 def listBitwiseOr(c1, c2):
     list = [i | j for i, j in zip(c1, c2)]
     return list
@@ -21,6 +24,13 @@ def check(pos, maze):
     if (maze[pos[0]][pos[1]][1] != 1):
         possibleMoves.append([pos[0]+1, pos[1]])
     return possibleMoves
+
+
+def generateSeq():
+    stuff = ["L", "R", "U", "D"]
+    for L in range(0, 10):
+        for subset in itertools.combinations_with_replacement(stuff, L):
+            print(subset)
 
 
 def get_xsize(maze):

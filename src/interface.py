@@ -3,8 +3,6 @@ from utils import *
 from maps import *
 
 # set up pygame window
-WIDTH = 1000
-HEIGHT = 1000
 FPS = 60
 
 # Define colours
@@ -13,6 +11,7 @@ GREEN = (0, 51, 0)
 BLUE = (0, 51, 204)
 YELLOW = (255 ,255 ,0)
 RED = (204, 0, 0)
+BLACK = (0,0,0)
 
 def drawRect(window, posX, posY, rectWidth, rectHeight):
 
@@ -34,7 +33,7 @@ def drawWall(window, posX, posY, rectWidth, rectHeight, side):
 
     print("Wall Width = ", wallWidth)
     print("Wall Height = ",wallHeight)
-    pygame.draw.rect(window, GREEN, (posX, posY, wallWidth, wallHeight))
+    pygame.draw.rect(window, BLACK, (posX, posY, wallWidth, wallHeight))
 
 
 def drawAgent(window, x, y):
@@ -121,6 +120,14 @@ def initMaze(maze,goal):
     width = len(maze[0]*100)
     height = len(maze*100)
 
+    if width > 600:
+        width = 600
+    if height > 600:
+        height = 600
+
+    width = 600
+    height = 600
+
     window = pygame.display.set_mode([width, height])
 
     rectWidth = window.get_width() / len(maze)
@@ -144,4 +151,4 @@ def initMaze(maze,goal):
 
 
 #TESTING
-initMaze(test3, testGoal3)
+initMaze(test4, testGoal4)

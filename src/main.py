@@ -3,7 +3,6 @@
 from logos import *
 from maps import *
 from utils import *
-from print import *
 from typing import Counter
 from ai import *
 from moves import *
@@ -45,16 +44,16 @@ def human_mode():
             'Choose map: \n 1 => test \n 2 => ??? \n 3 => ??? \n 4 => ??? \n 5 => Exit \n ->')
 
         if eval(maze_sel) == 1:
-            human_game(test, testInit, testFin)
+            human_game(test, testInit, testGOal)
 
         elif eval(maze_sel) == 2:
-            human_game(test, testInit, testFin)
+            human_game(test, testInit, testGoal)
 
         elif eval(maze_sel) == 3:
-            human_game(test, testInit, testFin)
+            human_game(test, testInit, testGoal)
 
         elif eval(maze_sel) == 4:
-            human_game(test, testInit, testFin)
+            human_game(test, testInit, testGoal)
 
         elif eval(maze_sel) == 5:
             print('GOODBYE!!!\n')

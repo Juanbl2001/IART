@@ -70,3 +70,11 @@ test3 = [[ul_wall, u_wall, u_wall, u_wall, ur_wall],
 #(X, Y, DIRECTION ->
 testGoal3 = [3,0,"u"]
 #print(ur_wall)
+
+
+test4 = [[ul_wall, u_wall, ur_wall],
+        [dl_wall, r_wall, r_wall],
+        [dl_wall, d_wall, dr_wall]]
+
+#(X, Y, DIRECTION ->
+testGoal4 = [2,2,"d"]

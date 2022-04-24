@@ -2,6 +2,7 @@
 # Cost -> Number of moves until it reaches the exit
 # Heuristic -> Manhattan distance
 
+from calendar import c
 from cmath import sqrt
 from curses import nl
 from importlib.resources import path
@@ -80,13 +81,15 @@ def newBfs(start, goal, maze):
     queue.append(["R"])
     queue.append(["U"])
     queue.append(["D"])
-
+    count = 0
     while queue:
-
+        count += 1
         seq = queue.pop(0)
         aux = [start[0], start[1]]
 
         if goal == move(seq, aux, goal, maze):
+            print("\nCount in BFS: "+str(count))
+            print("Value BFS: " + str("".join(seq)))
             return seq
 
         for movDir in ["L", "R", "U", "D"]:
@@ -171,4 +174,4 @@ def setUp(seq, start, goal, maze):
     aux = [start[0], start[1]]
     # get last position achievable with that sequence
     pos = move(seq, aux, goal, maze)
-    return [seq, eucDist(pos, goal), pos]
+    return [seq, manDist(pos, goal), pos]

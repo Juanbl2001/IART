@@ -4,7 +4,7 @@
 
 from calendar import c
 from cmath import sqrt
-from curses import nl
+#from curses import nl
 from importlib.resources import path
 from lib2to3.pgen2.token import NEWLINE
 from queue import *
@@ -85,10 +85,6 @@ def newBfs(start, goal, maze):
     while queue:
         count += 1
         seq = queue.pop(0)
-<<<<<<< HEAD
-        #print("Value Error: "+ str("".join(seq)))
-=======
->>>>>>> 29fc2d731a127f8917e2052ec9a764e60ede699d
         aux = [start[0], start[1]]
 
         if goal == move(seq, aux, goal, maze):

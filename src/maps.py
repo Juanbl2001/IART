@@ -119,7 +119,7 @@ p6 = [[ulr_wall, u_wall, ur_wall, ul_wall, udr_wall],
       [l_wall, no_wall, no_wall, no_wall, r_wall],
       [dl_wall, dr_wall, dl_wall, d_wall, dr_wall]]
 
-p7 = [[ul_wall, u_wall, ud_wall, ul_wall, ulr_wall],
+p7 = [[ul_wall, u_wall, u_wall, ur_wall, ulr_wall],
       [l_wall, no_wall, dr_wall, lr_wall, lr_wall],
       [l_wall, dr_wall, ulr_wall, dl_wall, r_wall],
       [l_wall, ud_wall, dr_wall, udl_wall, r_wall],

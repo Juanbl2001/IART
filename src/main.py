@@ -46,7 +46,7 @@ def human_mode():
             'Choose map: \n 1 => test \n 2 => ??? \n 3 => ??? \n 4 => ??? \n 5 => Exit \n ->')
 
         if eval(maze_sel) == 1:
-            human_game(test, testInit, testGOal)
+            human_game(test, testInit, testGoal)
 
         elif eval(maze_sel) == 2:
             human_game(test, testInit, testGoal)
@@ -111,17 +111,20 @@ def human_game(maze, pos, fin):
     print('YOU WON!!!\n')
     return
 
-
+#UCS
 start_ucs = time()
 ucs(p18Start, p18Goal,p18,7)
-
 end_ucs=time()
 print("Time in UCS: " + str(end_ucs-start_ucs))
 
+#Greedy
 start_greedy = time()
-
 greedy(p18Start, p18Goal,p18,7)
-
 end_greedy = time()
-
 print("Time in Greedy: " + str(end_greedy-start_greedy))
+
+#BFS
+start_bfs = time()
+newBfs(p2Start, p2Goal,p2)
+end_bfs = time()
+print("Time in BFS: " + str(end_bfs-start_bfs))

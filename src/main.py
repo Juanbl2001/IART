@@ -10,6 +10,7 @@ from moves import *
 from time import *
 from stats import *
 
+
 def main():
 
     # print maintitle logo
@@ -113,34 +114,31 @@ def human_game(maze, pos, fin):
 
 
 # UCS
-
 start_dfs = time()
-dfs(Start, Goal,p18,7)
-end_dfs=time()
+dfs(start, goal, p2, 4)
+end_dfs = time()
 time_dfs = float(end_dfs-start_dfs)
 print("Time in DFS: " + str(end_dfs-start_dfs))
 
-#Greedy
+# Greedy
 start_greedy = time()
-greedy(Start, Goal,p18,7)
+greedy(start, goal,p2,7)
 end_greedy = time()
 time_greedy = float(end_greedy-start_greedy)
 print("Time in Greedy: " + str(end_greedy-start_greedy))
 
-#BFS
+# BFS
 start_bfs = time()
-bfs(Start, Goal,p18)
+bfs(start, goal, p2)
 end_bfs = time()
 time_bfs = float(end_bfs-start_bfs)
 print("Time in BFS: " + str(end_bfs-start_bfs))
 
-#A*
+# A*
 start_astar = time()
-aStar(Start, Goal,p18,7)
+aStar(start, goal, p2, 4)
 end_astar = time()
 time_astar = float(end_astar-start_astar)
 print("Time in Astar: " + str(end_astar-start_astar))
 
-#TimeEfficiency(time_dfs,time_bfs,time_greedy,time_astar,4)
-SpaceEfficiency(getCostDfs(),getCostBfs(),getCostGreedy(),getCostAstar(),7)
-
+TimeEfficiency(time_dfs, time_bfs, time_greedy, time_astar, 4)

@@ -23,7 +23,7 @@ dr_wall = listBitwiseOr(d_wall, r_wall)
 
 dl_wall = listBitwiseOr(d_wall, l_wall)
 
-dlr_wall = listBitwiseOr(listBitwiseOr(d_wall, r_wall), r_wall)
+dlr_wall = listBitwiseOr(listBitwiseOr(d_wall, l_wall), r_wall)
 
 ur_wall = listBitwiseOr(u_wall, r_wall)
 

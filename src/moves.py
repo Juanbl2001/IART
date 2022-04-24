@@ -31,6 +31,7 @@ def movedown(pos, maze):
 def move(seq, pos, goal, maze):
 
     for j in range(0, round(len(maze)*2)):
+
         for i in seq:
             if i.upper() == 'L':
                 moveleft(pos, maze)

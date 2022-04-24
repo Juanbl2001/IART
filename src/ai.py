@@ -97,7 +97,7 @@ def newBfs(start, goal, maze):
     while queue:
         count+=1
         seq = queue.pop(0)
-        # print(seq)
+        #print("Value Error: "+ str("".join(seq)))
         aux = [start[0], start[1]]
         if goal == move(seq, aux, goal, maze):
             print("\nCount in BFS: "+str(count))

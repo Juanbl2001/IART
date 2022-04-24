@@ -112,6 +112,7 @@ def human_game(maze, pos, fin):
     return
 
 #UCS
+"""
 start_ucs = time()
 ucs(p18Start, p18Goal,p18,7)
 end_ucs=time()
@@ -122,9 +123,9 @@ start_greedy = time()
 greedy(p18Start, p18Goal,p18,7)
 end_greedy = time()
 print("Time in Greedy: " + str(end_greedy-start_greedy))
-
+"""
 #BFS
 start_bfs = time()
-newBfs(p2Start, p2Goal,p2)
+newBfs(p18Start, p18Goal,p18)
 end_bfs = time()
 print("Time in BFS: " + str(end_bfs-start_bfs))

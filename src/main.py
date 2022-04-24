@@ -124,29 +124,24 @@ def helperFunc(pt,s):
     dfs(start, goal, p, s)
     end_dfs = time()
     time_dfs = float(end_dfs-start_dfs)
-    print("Time in DFS: " + str(end_dfs-start_dfs))
-    print(getCostDfs())
 
     # Greedy
     start_greedy = time()
     greedy(start, goal,p,s)
     end_greedy = time()
     time_greedy = float(end_greedy-start_greedy)
-    print("Time in Greedy: " + str(end_greedy-start_greedy))
 
     # BFS
     start_bfs = time()
     bfs(start, goal, p)
     end_bfs = time()
     time_bfs = float(end_bfs-start_bfs)
-    print("Time in BFS: " + str(end_bfs-start_bfs))
 
     # A*
     start_astar = time()
     aStar(start, goal, p, s)
     end_astar = time()
     time_astar = float(end_astar-start_astar)
-    print("Time in Astar: " + str(end_astar-start_astar))
 
     TimeEfficiency(time_dfs, time_bfs, time_greedy, time_astar, s)
     SpaceEfficiency(getCostDfs(),getCostBfs(),getCostGreedy(),getCostAstar(),s)

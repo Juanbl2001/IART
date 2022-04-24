@@ -64,7 +64,6 @@ def dfs(start, goal, maze, sizeOfAnswer, seq=None, visited=None, limit=None):
 
         if goal == move(seq, aux, goal, maze) and len(seq) == sizeOfAnswer:
             print("Value DFS: " + str("".join(seq)))
-            print(seq)
             return seq
 
         for movDir in ["U", "R", "L", "D"]:
@@ -89,7 +88,7 @@ def bfs(start, goal, maze):
         aux = [start[0], start[1]]
 
         if goal == move(seq, aux, goal, maze):
-            print("\nCount in BFS: "+str(count))
+            #print("\nCount in BFS: "+str(count))
             costBFS = count
             print("Value BFS: " + str("".join(seq)))
             return seq
@@ -126,7 +125,7 @@ def greedy(start, goal, maze, sizeOfAnswer):
 
         # checks depth
         if goal == bestVal[2]:
-            print("\nCount in Greedy: "+str(count))
+            #print("\nCount in Greedy: "+str(count))
             costGreedy = count
             print("Value Greedy: " + str(bestVal[0]))
             return bestVal[0]
@@ -163,7 +162,7 @@ def aStar(start, goal, maze, sizeOfAnswer):
 
         # checks depth
         if goal == bestVal[2]:
-            print("\nCount in Astar: "+str(count))
+            #print("\nCount in Astar: "+str(count))
             costAstar = count
             print("Value Astar: " + str(bestVal[0]))
             return bestVal[0]
@@ -174,7 +173,7 @@ def aStar(start, goal, maze, sizeOfAnswer):
                 queue.append(newSeq)
 
 
-
+#function to store essencial values for A* and Greedy
 def setUp(seq, start, goal, maze):
     aux = [start[0], start[1]]
     # get last position achievable with that sequence

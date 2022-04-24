@@ -113,20 +113,27 @@ def human_game(maze, pos, fin):
 
 
 # UCS
-"""
-start_ucs = time()
-ucs(p18Start, p18Goal,p18,7)
-end_ucs=time()
-print("Time in UCS: " + str(end_ucs-start_ucs))
+
+start_dfs = time()
+newDfs(Start, Goal,p18,7)
+end_dfs=time()
+print("Time in DFS: " + str(end_dfs-start_dfs))
 
 #Greedy
 start_greedy = time()
-greedy(p18Start, p18Goal,p18,7)
+greedy(Start, Goal,p18,7)
 end_greedy = time()
 print("Time in Greedy: " + str(end_greedy-start_greedy))
+
 #BFS
 start_bfs = time()
-newBfs(p18Start, p18Goal,p18)
+newBfs(Start, Goal,p18)
 end_bfs = time()
 print("Time in BFS: " + str(end_bfs-start_bfs))
-"""
+
+#A*
+start_astar = time()
+aStar(Start, Goal,p18,7)
+end_astar = time()
+print("Time in Astar: " + str(end_astar-start_astar))
+

@@ -16,13 +16,6 @@ import math
 valueCost = 0
 
 
-def linDist(robotPos, finalPos):
-
-    h = sqrt((abs(robotPos[0] - finalPos[0])) ^ 2 +
-             (abs(robotPos[0] - finalPos[0])) ^ 2 ^ 2)
-    return h
-
-
 def manDist(robotPos, finalPos):
 
     h = abs(robotPos[0] - finalPos[0]) + abs(robotPos[1] - finalPos[1])
@@ -43,7 +36,6 @@ def eucDist(robotPos, finalPos):
 def getCost():
     return valueCost
 
-
 def newDfs(start, goal, maze, sizeOfAnswer, seq=None, visited=None, limit=None):
 
     if seq is None:
@@ -63,6 +55,7 @@ def newDfs(start, goal, maze, sizeOfAnswer, seq=None, visited=None, limit=None):
         aux = [start[0], start[1]]
 
         if goal == move(seq, aux, goal, maze) and len(seq) == sizeOfAnswer:
+            print("Value DFS: " + str("".join(seq)))
             print(seq)
             return seq
 
@@ -134,7 +127,7 @@ def greedy(start, goal, maze, sizeOfAnswer):
                 queue.append(newSeq)
 
 
-def ucs(start, goal, maze, sizeOfAnswer):
+def aStar(start, goal, maze, sizeOfAnswer):
 
     queue = []
     queue.append(setUp("L", start, goal, maze))
@@ -160,14 +153,15 @@ def ucs(start, goal, maze, sizeOfAnswer):
 
         # checks depth
         if goal == bestVal[2]:
-            print("\nCount in UCS: "+str(count))
-            print("Value UCS: " + str(bestVal[0]))
+            print("\nCount in Astar: "+str(count))
+            print("Value Astar: " + str(bestVal[0]))
             return bestVal[0]
 
         if(len(bestVal[0]) < sizeOfAnswer):
             for movDir in "LDUR":
                 newSeq = setUp(bestVal[0]+movDir, start, goal, maze)
                 queue.append(newSeq)
+
 
 
 def setUp(seq, start, goal, maze):

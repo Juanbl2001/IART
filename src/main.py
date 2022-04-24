@@ -112,6 +112,7 @@ def human_game(maze, pos, fin):
     return
 
 
+'''
 # UCS
 
 start_dfs = time()
@@ -136,4 +137,4 @@ start_astar = time()
 aStar(Start, Goal,p18,7)
 end_astar = time()
 print("Time in Astar: " + str(end_astar-start_astar))
-
+'''

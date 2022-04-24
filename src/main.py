@@ -1,11 +1,13 @@
 #import imp
 
+from tracemalloc import start
 from logos import *
 from maps import *
 from utils import *
 from typing import Counter
 from ai import *
 from moves import *
+from time import *
 
 
 def main():
@@ -110,4 +112,16 @@ def human_game(maze, pos, fin):
     return
 
 
-main()
+start_ucs = time()
+ucs(p18Start, p18Goal,p18,7)
+
+end_ucs=time()
+print("Time in UCS: " + str(end_ucs-start_ucs))
+
+start_greedy = time()
+
+greedy(p18Start, p18Goal,p18,7)
+
+end_greedy = time()
+
+print("Time in Greedy: " + str(end_greedy-start_greedy))

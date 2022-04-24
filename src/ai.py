@@ -2,8 +2,12 @@
 # Cost -> Number of moves until it reaches the exit
 # Heuristic -> Manhattan distance
 
+from cmath import sqrt
+from curses import nl
 from importlib.resources import path
+from lib2to3.pgen2.token import NEWLINE
 from queue import *
+from time import sleep
 from moves import *
 from utils import *
 import math
@@ -13,9 +17,8 @@ valueCost = 0
 
 def linDist(robotPos, finalPos):
 
-    h = ((robotPos[0] - finalPos[0]) ^ 2 +
-         (robotPos[1] - finalPos[1]) ^ 2) ^ 0.5
-
+    h = sqrt((abs(robotPos[0] - finalPos[0])) ^ 2 +
+             (abs(robotPos[0] - finalPos[0])) ^ 2 ^ 2)
     return h
 
 
@@ -92,34 +95,80 @@ def newBfs(start, goal, maze):
             queue.append(newSeq)
 
 
-def greedy(start, goal, maze):
+def greedy(start, goal, maze, sizeOfAnswer):
 
-    path = []
-    explored = []
-    pos = start
+    queue = []
+    queue.append(setUp("L", start, goal, maze))
+    queue.append(setUp("R", start, goal, maze))
+    queue.append(setUp("U", start, goal, maze))
+    queue.append(setUp("D", start, goal, maze))
+    count = 0
 
-    path.append(start)
-    explored.append(start)
+    # by storing the value in the queue we dont need to re-search the last position of each value each time
+    # time saved from 0.8s -> 0.004s
+    while queue:
+        bestHeuristic = 999.0
+        for i in range(len(queue)):
+            if(queue[i][1] <= bestHeuristic):
+                if(queue[i][1] == bestHeuristic):
+                    continue
+                else:
+                    bestVal = queue[i]
+                    bestHeuristic = queue[i][1]
 
-    while pos != goal:
+        count += 1
+        queue.remove(bestVal)
 
-        neighbours = check(pos, maze)
-        h = 9999
+        # checks depth
+        if goal == bestVal[2]:
+            print("\nCount in Greedy: "+str(count))
+            print("Value Greedy: " + str(bestVal[0]))
+            return bestVal[0]
 
-        for n in neighbours:
+        if(len(bestVal[0]) < sizeOfAnswer):
+            for movDir in "LDUR":
+                newSeq = setUp(bestVal[0]+movDir, start, goal, maze)
+                queue.append(newSeq)
 
-            hAux = manDist(n, goal)
 
-            if hAux < h and (n not in explored):
-                h = hAux
-                pos = n
-                explored.append(n)
+def ucs(start, goal, maze, sizeOfAnswer):
 
-        if pos not in path:
-            path.append(pos)
+    queue = []
+    queue.append(setUp("L", start, goal, maze))
+    queue.append(setUp("R", start, goal, maze))
+    queue.append(setUp("U", start, goal, maze))
+    queue.append(setUp("D", start, goal, maze))
+    count = 0
 
-        else:
-            print("Couldn't find goal :(")
-            return 0
+    # by storing the value in the queue we dont need to re-search the last position of each value each time
+    # time saved from 0.8s -> 0.004s
+    while queue:
+        bestHeuristic = 999.0
+        for i in range(len(queue)):
+            if(queue[i][1] <= bestHeuristic):
+                if(queue[i][1] == bestHeuristic and len(queue[i][0]) > len(bestVal[0])):
+                    continue
+                else:
+                    bestVal = queue[i]
+                    bestHeuristic = queue[i][1]
+        count += 1
 
-    return path
+        queue.remove(bestVal)
+
+        # checks depth
+        if goal == bestVal[2]:
+            print("\nCount in UCS: "+str(count))
+            print("Value UCS: " + str(bestVal[0]))
+            return bestVal[0]
+
+        if(len(bestVal[0]) < sizeOfAnswer):
+            for movDir in "LDUR":
+                newSeq = setUp(bestVal[0]+movDir, start, goal, maze)
+                queue.append(newSeq)
+
+
+def setUp(seq, start, goal, maze):
+    aux = [start[0], start[1]]
+    # get last position achievable with that sequence
+    pos = move(seq, aux, goal, maze)
+    return [seq, eucDist(pos, goal), pos]

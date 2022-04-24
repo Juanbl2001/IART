@@ -8,7 +8,7 @@ from typing import Counter
 from ai import *
 from moves import *
 from time import *
-from stats import *
+#from stats import *
 
 
 def main():
@@ -143,7 +143,7 @@ def helperFunc(pt,s):
     end_astar = time()
     time_astar = float(end_astar-start_astar)
 
-    TimeEfficiency(time_dfs, time_bfs, time_greedy, time_astar, s)
-    SpaceEfficiency(getCostDfs(),getCostBfs(),getCostGreedy(),getCostAstar(),s)
+    #TimeEfficiency(time_dfs, time_bfs, time_greedy, time_astar, s)
+    #SpaceEfficiency(getCostDfs(),getCostBfs(),getCostGreedy(),getCostAstar(),s)
 
-helperFunc(mapOption,s)
+#helperFunc(mapOption,s)

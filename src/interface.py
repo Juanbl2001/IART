@@ -4,6 +4,7 @@ from maps import *
 
 # set up pygame window
 FPS = 60
+BLOCK = 140
 
 # Define colours
 WHITE = (255, 255, 255)
@@ -12,6 +13,9 @@ BLUE = (0, 51, 204)
 YELLOW = (255 ,255 ,0)
 RED = (204, 0, 0)
 BLACK = (0,0,0)
+
+# FONTS
+FONT = 'calibri'
 
 def drawRect(window, posX, posY, rectWidth, rectHeight):
 
@@ -31,8 +35,6 @@ def drawWall(window, posX, posY, rectWidth, rectHeight, side):
         posX += (rectWidth - wallWidth)
         posY += (rectHeight - wallHeight)
 
-    #print("Wall Width = ", wallWidth)
-    #print("Wall Height = ",wallHeight)
     pygame.draw.rect(window, BLACK, (posX, posY, wallWidth, wallHeight))
 
 
@@ -67,8 +69,8 @@ def drawExit(window, exit, rectWidth, rectHeight):
         x = rectWidth * exit[0]
         y = rectHeight * exit[1]
     '''
-    
-    pygame.draw.rect(window,RED,(exit[0]*100,exit[1]*100,rectWidth,rectHeight))
+
+    pygame.draw.rect(window,RED,(exit[0]*BLOCK,exit[1]*BLOCK,rectWidth,rectHeight))
 
 def drawMaze(maze, window, rectWidth, rectHeight, goal):
 
@@ -111,6 +113,39 @@ def drawMaze(maze, window, rectWidth, rectHeight, goal):
         posY += rectHeight
     drawExit(window, goal, rectWidth, rectHeight)
 
+def drawText(window, font, text, x, y):
+    textRenderer = font.render(text, False, WHITE)
+    window.blit(textRenderer, (x, y))
+
+def menu(window, op):
+    
+    pygame.font.init()
+    font = pygame.font.SysFont(FONT, 30)
+
+    #Choose option
+    text = "Choose Option"
+    x = 115
+    y = 50
+    drawText(window, font, text, x, y)
+
+    #OP1 - Human mode
+    text = "1. Human Mode"
+    x = 115
+    y = 150
+    drawText(window, font, text, x, y)
+
+    #OP2 - AI mode
+    text = "2. AI Mode"
+    x = 115
+    y = 225
+    drawText(window, font, text, x, y)
+
+    # OP3 - EXIT
+    text = "3. Exit"
+    x = 115
+    y = 300
+    drawText(window, font, text, x, y)
+
 
 def initMaze(maze,goal):
 
@@ -119,8 +154,8 @@ def initMaze(maze,goal):
     pygame.display.set_caption("Python Maze Generator")
     clock = pygame.time.Clock()
 
-    width = len(maze[0]*100)
-    height = len(maze*100)
+    width = len(maze[0]*BLOCK)
+    height = len(maze*BLOCK)
 
     if width > 600:
         width = 600
@@ -132,8 +167,9 @@ def initMaze(maze,goal):
     rectWidth = window.get_width() / len(maze)
     rectHeight = window.get_height() / len(maze[0])
 
-    drawMaze(maze,window,rectWidth,rectHeight,goal)
-    drawAgent(window,rectWidth/2,rectHeight/2)
+    #drawMaze(maze,window,rectWidth,rectHeight,goal)
+    #drawAgent(window,rectWidth/2,rectHeight/2)
+    menu(window, 1)
 
     running = True
     while running:

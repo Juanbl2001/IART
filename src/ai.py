@@ -13,8 +13,23 @@ from moves import *
 from utils import *
 import math
 
-valueCost = 0
+costBFS=0
+costDFS=0
+costGreedy=0
+costAstar=0
 
+def getCostBfs():
+    global costBFS
+    return costBFS
+def getCostDfs():
+    global costDFS
+    return costBFS
+def getCostGreedy():
+    global costGreedy
+    return costGreedy
+def getCostAstar():
+    global costAstar    
+    return costAstar
 
 def manDist(robotPos, finalPos):
 
@@ -22,22 +37,15 @@ def manDist(robotPos, finalPos):
 
     return h
 
-
-def addCost():
-    valueCost += 1
-
-
 def eucDist(robotPos, finalPos):
 
     h = math.dist(robotPos, finalPos)
     return h
 
 
-def getCost():
-    return valueCost
-
 def dfs(start, goal, maze, sizeOfAnswer, seq=None, visited=None, limit=None):
-
+    global costDFS
+    costDFS+=1
     if seq is None:
         seq = []
 
@@ -68,7 +76,7 @@ def dfs(start, goal, maze, sizeOfAnswer, seq=None, visited=None, limit=None):
 
 
 def bfs(start, goal, maze):
-
+    global costBFS
     queue = []
     queue.append(["L"])
     queue.append(["R"])
@@ -82,6 +90,7 @@ def bfs(start, goal, maze):
 
         if goal == move(seq, aux, goal, maze):
             print("\nCount in BFS: "+str(count))
+            costBFS = count
             print("Value BFS: " + str("".join(seq)))
             return seq
 
@@ -92,7 +101,7 @@ def bfs(start, goal, maze):
 
 
 def greedy(start, goal, maze, sizeOfAnswer):
-
+    global costGreedy
     queue = []
     queue.append(setUp("L", start, goal, maze))
     queue.append(setUp("R", start, goal, maze))
@@ -118,6 +127,7 @@ def greedy(start, goal, maze, sizeOfAnswer):
         # checks depth
         if goal == bestVal[2]:
             print("\nCount in Greedy: "+str(count))
+            costGreedy = count
             print("Value Greedy: " + str(bestVal[0]))
             return bestVal[0]
 
@@ -128,7 +138,7 @@ def greedy(start, goal, maze, sizeOfAnswer):
 
 
 def aStar(start, goal, maze, sizeOfAnswer):
-
+    global costAstar
     queue = []
     queue.append(setUp("L", start, goal, maze))
     queue.append(setUp("R", start, goal, maze))
@@ -154,6 +164,7 @@ def aStar(start, goal, maze, sizeOfAnswer):
         # checks depth
         if goal == bestVal[2]:
             print("\nCount in Astar: "+str(count))
+            costAstar = count
             print("Value Astar: " + str(bestVal[0]))
             return bestVal[0]
 

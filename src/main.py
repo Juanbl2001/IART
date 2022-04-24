@@ -115,31 +115,32 @@ def human_game(maze, pos, fin):
 # UCS
 
 start_dfs = time()
-dfs(Start, Goal,p2,4)
+dfs(Start, Goal,p18,7)
 end_dfs=time()
 time_dfs = float(end_dfs-start_dfs)
 print("Time in DFS: " + str(end_dfs-start_dfs))
 
 #Greedy
 start_greedy = time()
-greedy(Start, Goal,p2,4)
+greedy(Start, Goal,p18,7)
 end_greedy = time()
 time_greedy = float(end_greedy-start_greedy)
 print("Time in Greedy: " + str(end_greedy-start_greedy))
 
 #BFS
 start_bfs = time()
-bfs(Start, Goal,p2)
+bfs(Start, Goal,p18)
 end_bfs = time()
 time_bfs = float(end_bfs-start_bfs)
 print("Time in BFS: " + str(end_bfs-start_bfs))
 
 #A*
 start_astar = time()
-aStar(Start, Goal,p2,4)
+aStar(Start, Goal,p18,7)
 end_astar = time()
 time_astar = float(end_astar-start_astar)
 print("Time in Astar: " + str(end_astar-start_astar))
 
-TimeEfficiency(time_dfs,time_bfs,time_greedy,time_astar,4)
+#TimeEfficiency(time_dfs,time_bfs,time_greedy,time_astar,4)
+SpaceEfficiency(getCostDfs(),getCostBfs(),getCostGreedy(),getCostAstar(),7)
 

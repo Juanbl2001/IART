@@ -59,7 +59,7 @@ def dfs(start, goal, maze, sizeOfAnswer, seq=None, visited=None, limit=None):
             print(seq)
             return seq
 
-        for movDir in ["L", "R", "U", "D"]:
+        for movDir in ["U", "R", "L", "D"]:
             newSeq = list(seq)
             newSeq.append(movDir)
             if newSeq not in visited:

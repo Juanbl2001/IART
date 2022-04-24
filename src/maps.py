@@ -80,26 +80,71 @@ test4 = [[ul_wall, u_wall, ur_wall],
 # (X, Y, DIRECTION ->
 testGoal4 = [2, 2, "d"]
 
+Start = [4, 0]
+Goal = [0, 4]
+
 p1 = [[ulr_wall, ul_wall, u_wall, ur_wall, ulr_wall],
       [l_wall, no_wall, ur_wall, l_wall, dr_wall],
       [l_wall, r_wall, dl_wall, no_wall, ur_wall],
       [l_wall, no_wall, u_wall, no_wall, r_wall],
       [dl_wall, d_wall, d_wall, d_wall, dr_wall]]
-p1Start = [4, 0]
-p1Goal = [0, 4]
 
 p2 = [[udl_wall, ud_wall, ud_wall, u_wall, udr_wall],
       [ulr_wall, udl_wall, u_wall, no_wall, ur_wall],
       [l_wall, ur_wall, l_wall, r_wall, lr_wall],
       [l_wall, no_wall, d_wall, no_wall, dr_wall],
       [dl_wall, d_wall, ud_wall, d_wall, udr_wall]]
-p2Start = [4, 0]
-p2Goal = [0, 4]
+
+p3 = [[ul_wall, u_wall, u_wall, ur_wall, ulr_wall],
+      [l_wall, r_wall, dl_wall, no_wall, r_wall],
+      [l_wall, no_wall, udr_wall, l_wall, r_wall],
+      [l_wall, no_wall, udr_wall, l_wall, r_wall],
+      [dlr_wall, dl_wall, ud_wall, d_wall, dr_wall]]
+
+p4 = [[ulr_wall, udl_wall, u_wall, ud_wall, udr_wall],
+      [l_wall, ur_wall, dl_wall, u_wall, ur_wall],
+      [lr_wall, d_wall, u_wall, r_wall, dlr_wall],
+      [l_wall, u_wall, no_wall, no_wall, ur_wall],
+      [dl_wall, d_wall, d_wall, d_wall, dr_wall]]
+
+p5 = [[ulr_wall, ul_wall, u_wall, ur_wall, ulr_wall],
+      [l_wall, d_wall, no_wall, d_wall, r_wall],
+      [lr_wall, ulr_wall, l_wall, u_wall, dr_wall],
+      [l_wall, r_wall, l_wall, no_wall, ur_wall],
+      [dl_wall, dr_wall, dl_wall, d_wall, dr_wall]]
+
+p6 = [[ulr_wall, u_wall, ur_wall, ul_wall, udr_wall],
+      [dlr_wall, lr_wall, dl_wall, d_wall, ur_wall],
+      [ul_wall, no_wall, u_wall, u_wall, r_wall],
+      [l_wall, no_wall, no_wall, no_wall, r_wall],
+      [dl_wall, dr_wall, dl_wall, d_wall, dr_wall]]
+
+p7 = [[ul_wall, u_wall, ud_wall, ul_wall, ulr_wall],
+      [l_wall, no_wall, dr_wall, lr_wall, lr_wall],
+      [l_wall, dr_wall, ulr_wall, dl_wall, r_wall],
+      [l_wall, ud_wall, dr_wall, udl_wall, r_wall],
+      [dl_wall, ud_wall, udr_wall, udl_wall, dr_wall]]
+
+p8 = [[ul_wall, ur_wall, ulr_wall, ulr_wall, ulr_wall],
+      [dl_wall, no_wall, no_wall, no_wall, r_wall],
+      [udl_wall, no_wall, dr_wall, l_wall, r_wall],
+      [ulr_wall, dl_wall, ur_wall, dl_wall, r_wall],
+      [dl_wall, ud_wall, d_wall, udr_wall, dlr_wall]]
+
+p9 = [[ulr_wall, ul_wall, ud_wall, udr_wall, ulr_wall],
+      [l_wall, r_wall, udl_wall, u_wall, dr_wall],
+      [l_wall, r_wall, udl_wall, no_wall, udr_wall],
+      [lr_wall, dl_wall, ur_wall, l_wall, ur_wall],
+      [dl_wall, udr_wall, dl_wall, d_wall, dr_wall]]
+
+p10 = [[ul_wall, u_wall, u_wall, ud_wall, ur_wall],
+       [l_wall, d_wall, no_wall, ur_wall, dlr_wall],
+       [l_wall, ur_wall, dlr_wall, dl_wall, ur_wall],
+       [dl_wall, dr_wall, ul_wall, udr_wall, lr_wall],
+       [udl_wall, ud_wall, d_wall, ud_wall, dr_wall]]
 
 p18 = [[ulr_wall, ul_wall, udr_wall, ul_wall, udr_wall],
-      [l_wall, no_wall, udr_wall, l_wall, ur_wall],
-      [l_wall, no_wall, udr_wall, l_wall, dr_wall],
-      [lr_wall, l_wall, ur_wall, l_wall, udr_wall],
-      [dlr_wall, dl_wall, d_wall, d_wall, udr_wall]]
-p18Start = [4, 0]
-p18Goal = [0, 4]
+       [l_wall, no_wall, udr_wall, l_wall, ur_wall],
+       [l_wall, no_wall, udr_wall, l_wall, dr_wall],
+       [lr_wall, l_wall, ur_wall, l_wall, udr_wall],
+       [dlr_wall, dl_wall, d_wall, d_wall, udr_wall]]

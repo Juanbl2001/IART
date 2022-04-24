@@ -121,7 +121,6 @@ def greedy(start, goal, maze, sizeOfAnswer):
     while queue:
         bestHeuristic = 999.0
         for i in range(len(queue)):
-            count+=1
             if(queue[i][1] <= bestHeuristic):
                 if(queue[i][1] == bestHeuristic):
                     continue
@@ -129,6 +128,7 @@ def greedy(start, goal, maze, sizeOfAnswer):
                     bestVal = queue[i]
                     bestHeuristic = queue[i][1]
 
+        count+=1
         queue.remove(bestVal)
 
         #checks depth
@@ -158,13 +158,13 @@ def ucs(start, goal, maze, sizeOfAnswer):
     while queue:
         bestHeuristic = 999.0
         for i in range(len(queue)):
-            count+=1
             if(queue[i][1] <= bestHeuristic):
                 if(queue[i][1] == bestHeuristic and len(queue[i][0]) > len(bestVal[0])):
                     continue
                 else:
                     bestVal = queue[i]
                     bestHeuristic = queue[i][1]
+        count+=1
 
         queue.remove(bestVal)
 

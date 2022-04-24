@@ -87,3 +87,19 @@ p1 = [[ulr_wall, ul_wall, u_wall, ur_wall, ulr_wall],
       [dl_wall, d_wall, d_wall, d_wall, dr_wall]]
 p1Start = [4, 0]
 p1Goal = [0, 4]
+
+p2 = [[udl_wall, ud_wall, ud_wall, u_wall, udr_wall],
+      [ulr_wall, udl_wall, u_wall, no_wall, ur_wall],
+      [l_wall, ur_wall, l_wall, r_wall, lr_wall],
+      [l_wall, no_wall, d_wall, no_wall, dr_wall],
+      [dl_wall, d_wall, ud_wall, d_wall, udr_wall]]
+p2Start = [4, 0]
+p2Goal = [0, 4]
+
+p18 = [[ulr_wall, ul_wall, udr_wall, ul_wall, udr_wall],
+      [l_wall, no_wall, udr_wall, l_wall, ur_wall],
+      [l_wall, no_wall, udr_wall, l_wall, dr_wall],
+      [lr_wall, l_wall, ur_wall, l_wall, udr_wall],
+      [dlr_wall, dl_wall, d_wall, d_wall, udr_wall]]
+p18Start = [4, 0]
+p18Goal = [0, 4]

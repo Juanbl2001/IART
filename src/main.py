@@ -111,23 +111,16 @@ def human_game(maze, pos, fin):
     print('YOU WON!!!\n')
     return
 
+
 start_ucs = time()
-ucs([4, 0], [0, 4], [[ulr_wall, ul_wall, u_wall, ur_wall, ulr_wall],
-      [l_wall, no_wall, ur_wall, l_wall, dr_wall],
-      [l_wall, r_wall, dl_wall, no_wall, ur_wall],
-      [l_wall, no_wall, u_wall, no_wall, r_wall],
-      [dl_wall, d_wall, d_wall, d_wall, dr_wall]],4)
+ucs(p18Start, p18Goal,p18,7)
 
 end_ucs=time()
 print("Time in UCS: " + str(end_ucs-start_ucs))
 
 start_greedy = time()
 
-greedy([4, 0], [0, 4], [[ulr_wall, ul_wall, u_wall, ur_wall, ulr_wall],
-      [l_wall, no_wall, ur_wall, l_wall, dr_wall],
-      [l_wall, r_wall, dl_wall, no_wall, ur_wall],
-      [l_wall, no_wall, u_wall, no_wall, r_wall],
-      [dl_wall, d_wall, d_wall, d_wall, dr_wall]],4)
+greedy(p18Start, p18Goal,p18,7)
 
 end_greedy = time()
 

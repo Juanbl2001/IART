@@ -122,7 +122,7 @@ print("Time in DFS: " + str(end_dfs-start_dfs))
 
 # Greedy
 start_greedy = time()
-greedy(start, goal,p2,7)
+greedy(start, goal,p2,4)
 end_greedy = time()
 time_greedy = float(end_greedy-start_greedy)
 print("Time in Greedy: " + str(end_greedy-start_greedy))
@@ -142,3 +142,4 @@ time_astar = float(end_astar-start_astar)
 print("Time in Astar: " + str(end_astar-start_astar))
 
 TimeEfficiency(time_dfs, time_bfs, time_greedy, time_astar, 4)
+SpaceEfficiency(getCostDfs(),getCostBfs(),getCostGreedy(),getCostAstar(),4)

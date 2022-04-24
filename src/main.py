@@ -115,7 +115,7 @@ def human_game(maze, pos, fin):
 # UCS
 
 start_dfs = time()
-newDfs(Start, Goal,p18,7)
+dfs(Start, Goal,p18,7)
 end_dfs=time()
 print("Time in DFS: " + str(end_dfs-start_dfs))
 
@@ -127,7 +127,7 @@ print("Time in Greedy: " + str(end_greedy-start_greedy))
 
 #BFS
 start_bfs = time()
-newBfs(Start, Goal,p18)
+bfs(Start, Goal,p18)
 end_bfs = time()
 print("Time in BFS: " + str(end_bfs-start_bfs))
 

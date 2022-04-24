@@ -36,7 +36,7 @@ def eucDist(robotPos, finalPos):
 def getCost():
     return valueCost
 
-def newDfs(start, goal, maze, sizeOfAnswer, seq=None, visited=None, limit=None):
+def dfs(start, goal, maze, sizeOfAnswer, seq=None, visited=None, limit=None):
 
     if seq is None:
         seq = []
@@ -63,11 +63,11 @@ def newDfs(start, goal, maze, sizeOfAnswer, seq=None, visited=None, limit=None):
             newSeq = list(seq)
             newSeq.append(movDir)
             if newSeq not in visited:
-                newDfs(start, goal, maze, sizeOfAnswer,
+                dfs(start, goal, maze, sizeOfAnswer,
                        newSeq, visited, (limit+1))
 
 
-def newBfs(start, goal, maze):
+def bfs(start, goal, maze):
 
     queue = []
     queue.append(["L"])

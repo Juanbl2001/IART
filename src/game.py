@@ -2,6 +2,7 @@ import pygame
 from interface import *
 from ai import *
 from moves import *
+from utils import *
 
 def checkOption(pos):
 

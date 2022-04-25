@@ -10,7 +10,6 @@ from moves import *
 from time import *
 #from stats import *
 
-
 def main():
 
     # print maintitle logo

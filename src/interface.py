@@ -22,6 +22,11 @@ OPTION3_Y = OPTION2_Y + Y_DIST
 OP_WIDTH = 200
 OP_HEIGHT = 30
 
+# set up pygame window
+BLOCK = 100
+FPS = 60
+mazeSize = 5
+
 
 def drawRect(window, posX, posY, rectWidth, rectHeight):
 
@@ -44,7 +49,7 @@ def drawWall(window, posX, posY, rectWidth, rectHeight, side):
     pygame.draw.rect(window, BLACK, (posX, posY, wallWidth, wallHeight))
 
 
-def drawAgent(window, x, y, rectWidth, rectHeight,block):
+def drawAgent(window, x, y, rectWidth, rectHeight):
 
     if window.get_width() < window.get_height():
         aux = window.get_width()
@@ -52,7 +57,7 @@ def drawAgent(window, x, y, rectWidth, rectHeight,block):
         aux = window.get_height()
 
     radius = 0.06 * aux
-    pygame.draw.circle(window,BLUE,(x*block+rectWidth/2,y*block+rectHeight/2),radius)
+    pygame.draw.circle(window,BLUE,(x*BLOCK+rectWidth/2,y*BLOCK+rectHeight/2),radius)
 
 def drawExit(window, exit, rectWidth, rectHeight):
 
@@ -123,10 +128,7 @@ def drawText(window, font, text, x, y):
     textRenderer = font.render(text, False, WHITE)
     window.blit(textRenderer, (x, y))
 
-def drawMenu(window, op):
-
-    pygame.font.init()
-    font = pygame.font.SysFont(FONT, 30)
+def drawMenu(window, font):
 
     #Choose option
     text = "Choose Option"
@@ -147,12 +149,40 @@ def drawMenu(window, op):
     drawText(window, font, text, OPTIONS_X, OPTION3_Y)
 
 
-def initMaze(window,maze,goal,block):
+def drawHumanOptions(window,font):
+
+    window.fill(BLACK)
+
+    #Choose Option
+    text = "Human Mode"
+    x = 165
+    y = 40
+    drawText(window, font, text, x, y)
+
+    xDist = 200
+    yDist = 35
+
+    x = 100
+
+    mazeNumber = 1
+    #20 is the number of mazes
+    for i in range(20):
+        y = 100
+        for i in range(10):
+            text = "Maze " + str(mazeNumber)
+            drawText(window, font, text, x, y)
+            mazeNumber += 1
+            y += yDist
+        x += xDist
+
+
+
+def initMaze(window,maze,goal):
 
     rectWidth = window.get_width() / len(maze)
     rectHeight = window.get_height() / len(maze[0])
 
     drawMaze(maze,window,rectWidth,rectHeight,goal)
-    drawAgent(window,start[0],start[1],rectWidth,rectHeight,block)
+    drawAgent(window,start[0],start[1],rectWidth,rectHeight)
 
 #TESTING

@@ -22,14 +22,20 @@ OPTION3_Y = OPTION2_Y + Y_DIST
 OP_WIDTH = 200
 OP_HEIGHT = 30
 
-#HUMAN MODE OPTIONS POSITION
+#MAZE OPTIONS POSITION
 NUMBER_OF_MAZES = 20
-HUMAN_MAZESOP_Y = 100
-HUMAN_MAZESOP_X = 100
-HUMAN_MAZESOP_XDIST = 200
-HUMAN_MAZESOP_YDIST = 35
-HUMAN_OP_WIDTH = 100
-HUMAN_OP_HEIGHT = 30
+MAZESOP_Y = 100
+MAZESOP_X = 100
+MAZESOP_XDIST = 200
+MAZESOP_YDIST = 35
+MAZEOP_WIDTH = 100
+MAZEOP_HEIGHT = 30
+
+#SEARCH OPTIONS POSITION
+SEARCH_OPTION1_Y = 180
+SEARCH_OPTION2_Y = SEARCH_OPTION1_Y + Y_DIST
+SEARCH_OPTION3_Y = SEARCH_OPTION2_Y + Y_DIST
+SEARCH_OPTION4_Y = SEARCH_OPTION3_Y + Y_DIST
 
 # set up pygame window
 BLOCK = 100
@@ -159,12 +165,12 @@ def drawMenu(window, font):
     drawText(window, font, text, OPTIONS_X, OPTION3_Y)
 
 
-def drawHumanOptions(window,font):
+def drawMazeOptions(window,font):
 
     window.fill(BLACK)
 
     #Choose Option
-    text = "Human Mode"
+    text = "Choose Maze"
     x = 165
     y = 40
     drawText(window, font, text, x, y)
@@ -172,18 +178,43 @@ def drawHumanOptions(window,font):
     xDist = 200
     yDist = 35
 
-    x = HUMAN_MAZESOP_X
+    x = MAZESOP_X
 
     mazeNumber = 1
     #20 is the number of mazes
     for i in range(NUMBER_OF_MAZES):
-        y = HUMAN_MAZESOP_Y
+        y = MAZESOP_Y
         for i in range(int(NUMBER_OF_MAZES/2)):
             text = "Maze " + str(mazeNumber)
             drawText(window, font, text, x, y)
             mazeNumber += 1
-            y += HUMAN_MAZESOP_YDIST
-        x += HUMAN_MAZESOP_XDIST
+            y += MAZESOP_YDIST
+        x += MAZESOP_XDIST
+
+def drawSearchOptions(window,font):
+
+    window.fill(BLACK)
+
+    #Choose option
+    text = "Choose Search Method"
+    x = 125
+    y = 60
+    drawText(window, font, text, x, y)
+
+    #OP1 - Human mode
+    text = "1. Breadth-First"
+    drawText(window, font, text, OPTIONS_X, SEARCH_OPTION1_Y)
+
+    #OP2 - AI mode
+    text = "2. Depth-First"
+    drawText(window, font, text, OPTIONS_X, SEARCH_OPTION2_Y)
+
+    # OP3 - EXIT
+    text = "3. Greedy"
+    drawText(window, font, text, OPTIONS_X, SEARCH_OPTION3_Y)
+
+    text = "3. A* (A-star)"
+    drawText(window, font, text, OPTIONS_X, SEARCH_OPTION4_Y)
 
 
 def initMaze(window,maze,goal):

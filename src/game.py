@@ -66,84 +66,112 @@ def human_game(maze, pos, fin):
     print('YOU WON!!!\n')
     return
 
+def chooseMaze(window, font):
 
-def humanMode(window, font):
-
-    drawHumanOptions(window, font)
+    drawMazeOptions(window, font)
 
     running = True
     while running:
-        print("humanmode")
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                exit()
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
-                op = humanCheckOption(pos)
+                op = mazeCheckOption(pos)
 
                 if op >= 1 and op <= NUMBER_OF_MAZES:
                     mazeName = "p" + str(op)
-                    maze = globals()[mazeName]
-                    initMaze(window, maze, goal)
-                    running = False
+                    return mazeName
 
             pygame.display.flip()
 
-def humanCheckOption(pos):
+
+def mazeCheckOption(pos):
 
     posX = pos[0]
     posY = pos[1]
-    x = HUMAN_MAZESOP_X
-    y = HUMAN_MAZESOP_Y
+    x = MAZESOP_X
+    y = MAZESOP_Y
 
     mazeNumber = 1
     for i in range(NUMBER_OF_MAZES):
         #updates x coordenate (2nd column)
         if i == int(NUMBER_OF_MAZES/2):
-            x += HUMAN_MAZESOP_XDIST
-            y = HUMAN_MAZESOP_Y
+            x += MAZESOP_XDIST
+            y = MAZESOP_Y
 
-        if posX >= x and posX <= x+HUMAN_OP_WIDTH and posY >= y and posY <= y + HUMAN_OP_HEIGHT:
+        if posX >= x and posX <= x+MAZEOP_WIDTH and posY >= y and posY <= y + MAZEOP_HEIGHT:
             print(mazeNumber)
             return mazeNumber
-        y += HUMAN_MAZESOP_YDIST
+        y += MAZESOP_YDIST
         mazeNumber += 1
 
     return 0
 
-    '''
-    initMaze(window, p1, goal)
-    # map selector
-    maze_sel = 0
+def chooseSearch(window, font):
 
-    while maze_sel != 5:
-        maze_sel = input(
-            'Choose map: \n 1 => test \n 2 => ??? \n 3 => ??? \n 4 => ??? \n 5 => Exit \n ->')
+    drawSearchOptions(window, font)
 
-        if eval(maze_sel) == 1:
-            human_game(test, testInit, testGoal)
+    running = True
+    while running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                exit()
 
-        elif eval(maze_sel) == 2:
-            human_game(test, testInit, testGoal)
+            elif event.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()
+                op = searchCheckOption(pos)
 
-        elif eval(maze_sel) == 3:
-            human_game(test, testInit, testGoal)
+                if op == 1:
+                    return "bfs"
+                elif op == 2:
+                    return "dfs"
+                elif op == 3:
+                    return "greedy"
+                elif op == 4:
+                    return "astar"
 
-        elif eval(maze_sel) == 4:
-            human_game(test, testInit, testGoal)
+            pygame.display.flip()
 
-        elif eval(maze_sel) == 5:
-            print('GOODBYE!!!\n')
-            return 0
+def searchCheckOption(pos):
 
-        else:
-            print('INVALID OPTION!\n')
-    
-    '''
+    x = pos[0]
+    y = pos[1]
 
-def aiMode(window):
-    print("aimode")
+    if x >= OPTIONS_X and x <= OPTIONS_X + OP_WIDTH:
+        if y >= SEARCH_OPTION1_Y and y <= SEARCH_OPTION1_Y + OP_HEIGHT:
+            return 1
+        if y >= SEARCH_OPTION2_Y and y <= SEARCH_OPTION2_Y + OP_HEIGHT:
+            return 2
+        if y >= SEARCH_OPTION3_Y and y <= SEARCH_OPTION3_Y + OP_HEIGHT:
+            return 3
+        if y >= SEARCH_OPTION4_Y and y <= SEARCH_OPTION4_Y + OP_HEIGHT:
+            return 4
+
+    return 0
+
+
+def humanMode(window, font):
+
+    mazeName = chooseMaze(window, font)
+    if mazeName == 0:
+        return
+    maze = globals()[mazeName]
+    initMaze(window, maze, goal)
+
+
+def aiMode(window, font):
+
+    mazeName = chooseMaze(window, font)
+    if mazeName == 0:
+        return
+    maze = globals()[mazeName]
+    method = chooseSearch(window, font)
+
+    print(method)
+
+    #initMaze(window, maze, goal)
 
 def main():
 
@@ -175,17 +203,17 @@ def main():
         # Did the user click the window close button?
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                exit()
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
                 op = checkOption(pos)
                 if op == 1:
-                    humanMode(window,font)
+                    humanMode(window, font)
                 elif op == 2:
-                    aiMode(window)
+                    aiMode(window, font)
                 elif op == 3:
-                    running = False
+                    exit()
 
         # Flip the display
         pygame.display.flip()

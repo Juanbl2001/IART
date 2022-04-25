@@ -8,6 +8,7 @@ from cmath import sqrt
 from importlib.resources import path
 from lib2to3.pgen2.token import NEWLINE
 from queue import *
+import queue
 from time import sleep
 from moves import *
 from utils import *
@@ -42,8 +43,7 @@ def eucDist(robotPos, finalPos):
     h = math.dist(robotPos, finalPos)
     return h
 
-
-def dfs(start, goal, maze, sizeOfAnswer, seq=None, visited=None, limit=None):
+def dfs(start, goal, maze, sizeOfAnswer, seq=None, res = None, visited=None, limit=None):
     global costDFS
     costDFS+=1
     if seq is None:
@@ -55,7 +55,10 @@ def dfs(start, goal, maze, sizeOfAnswer, seq=None, visited=None, limit=None):
     if limit is None:
         limit = 0
 
-    if limit <= sizeOfAnswer:
+    if res is None:
+        res = []
+
+    if limit <= sizeOfAnswer and res == []:
 
         if seq != []:
             visited.append([seq])
@@ -64,15 +67,17 @@ def dfs(start, goal, maze, sizeOfAnswer, seq=None, visited=None, limit=None):
 
         if goal == move(seq, aux, goal, maze) and len(seq) == sizeOfAnswer:
             print("Value DFS: " + str("".join(seq)))
-            return seq
+            res = seq
+            return res
 
         for movDir in ["U", "R", "L", "D"]:
             newSeq = list(seq)
             newSeq.append(movDir)
             if newSeq not in visited:
-                dfs(start, goal, maze, sizeOfAnswer,
-                       newSeq, visited, (limit+1))
-
+                res = dfs(start, goal, maze, sizeOfAnswer,
+                       newSeq, res, visited, (limit+1))
+        return res
+    return res
 
 def bfs(start, goal, maze):
     global costBFS

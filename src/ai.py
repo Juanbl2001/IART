@@ -1,15 +1,3 @@
-# Using A*
-# Cost -> Number of moves until it reaches the exit
-# Heuristic -> Manhattan distance
-
-from calendar import c
-from cmath import sqrt
-#from curses import nl
-from importlib.resources import path
-from lib2to3.pgen2.token import NEWLINE
-from queue import *
-import queue
-from time import sleep
 from moves import *
 from utils import *
 import math
@@ -32,14 +20,17 @@ def getCostAstar():
     global costAstar    
     return costAstar
 
+# manhattan distance heuristic calculator
 def manDist(robotPos, finalPos):
     h = abs(robotPos[0] - finalPos[0]) + abs(robotPos[1] - finalPos[1])
     return h
 
+# euclidean distance heuristic calculator
 def eucDist(robotPos, finalPos):
     h = math.dist(robotPos, finalPos)
     return h
 
+# Chebyshev distance heuristic calculator
 def chebyDist(robotPos, finalPos):
     h = max(abs(robotPos[0] - finalPos[0]),abs(robotPos[1] - finalPos[1]))
     return h
@@ -67,10 +58,9 @@ def dfs(start, goal, maze, sizeOfAnswer, seq=None, res = None, visited=None, lim
         aux = [start[0], start[1]]
 
         if goal == move(seq, aux, goal, maze) and len(seq) == sizeOfAnswer:
-            #print("Value DFS: " + str("".join(seq)))
+    
             res = seq
             return res
-        #print(seq)
 
         for movDir in ["U", "R", "L", "D"]:
             newSeq = list(seq)
@@ -95,9 +85,9 @@ def bfs(start, goal, maze):
         aux = [start[0], start[1]]
 
         if goal == move(seq, aux, goal, maze):
-            #print("\nCount in BFS: "+str(count))
+            
             costBFS = count
-            #print("Value BFS: " + str("".join(seq)))
+            
             return seq
 
         for movDir in ["L", "R", "U", "D"]:
@@ -106,13 +96,13 @@ def bfs(start, goal, maze):
             queue.append(newSeq)
 
 
-def greedy(start, goal, maze, sizeOfAnswer):
+def greedy(start, goal, maze, sizeOfAnswer, heuristic):
     global costGreedy
     queue = []
-    queue.append(setUp("L", start, goal, maze))
-    queue.append(setUp("R", start, goal, maze))
-    queue.append(setUp("U", start, goal, maze))
-    queue.append(setUp("D", start, goal, maze))
+    queue.append(setUp("L", start, goal, maze, heuristic))
+    queue.append(setUp("R", start, goal, maze, heuristic))
+    queue.append(setUp("U", start, goal, maze, heuristic))
+    queue.append(setUp("D", start, goal, maze, heuristic))
     count = 0
 
     # by storing the value in the queue we dont need to re-search the last position of each value each time
@@ -130,24 +120,24 @@ def greedy(start, goal, maze, sizeOfAnswer):
 
         # checks depth
         if goal == bestVal[2]:
-            #print("\nCount in Greedy: "+str(count))
+            
             costGreedy = count
-            #print("Value Greedy: " + str(bestVal[0]))
+            
             return bestVal[0]
 
         if(len(bestVal[0]) < sizeOfAnswer):
             for movDir in "LDUR":
-                newSeq = setUp(bestVal[0]+movDir, start, goal, maze)
+                newSeq = setUp(bestVal[0]+movDir, start, goal, maze, heuristic)
                 queue.append(newSeq)
 
 
-def aStar(start, goal, maze, sizeOfAnswer):
+def aStar(start, goal, maze, sizeOfAnswer, heuristic):
     global costAstar
     queue = []
-    queue.append(setUp("L", start, goal, maze))
-    queue.append(setUp("R", start, goal, maze))
-    queue.append(setUp("U", start, goal, maze))
-    queue.append(setUp("D", start, goal, maze))
+    queue.append(setUp("L", start, goal, maze, heuristic))
+    queue.append(setUp("R", start, goal, maze, heuristic))
+    queue.append(setUp("U", start, goal, maze, heuristic))
+    queue.append(setUp("D", start, goal, maze, heuristic))
     count = 0
 
     # by storing the value in the queue we dont need to re-search the last position of each value each time
@@ -168,20 +158,25 @@ def aStar(start, goal, maze, sizeOfAnswer):
 
         # checks depth
         if goal == bestVal[2]:
-            #print("\nCount in Astar: "+str(count))
+            
             costAstar = count
-            #print("Value Astar: " + str(bestVal[0]))
+            
             return bestVal[0]
 
         if(len(bestVal[0]) < sizeOfAnswer):
             for movDir in "LDUR":
-                newSeq = setUp(bestVal[0]+movDir, start, goal, maze)
+                newSeq = setUp(bestVal[0]+movDir, start, goal, maze, heuristic)
                 queue.append(newSeq)
 
 
 #function to store essencial values for A* and Greedy
-def setUp(seq, start, goal, maze):
+def setUp(seq, start, goal, maze, heuristic):
     aux = [start[0], start[1]]
     # get last position achievable with that sequence
     pos = move(seq, aux, goal, maze)
-    return [seq, manDist(pos, goal), pos]
+    if heuristic == "man":
+        return [seq, manDist(pos, goal), pos]
+    elif heuristic == "cheby":
+        return [seq, chebyDist(pos, goal), pos]
+    elif heuristic == "euc":
+        return [seq, eucDist(pos, goal), pos]

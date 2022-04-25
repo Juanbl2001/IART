@@ -180,6 +180,6 @@ def setUp(seq, start, goal, maze, heuristic):
     if heuristic == "man":
         return [seq, manDist(pos, goal), pos]
     elif heuristic == "cheby":
-        return [seq, shebyDist(pos, goal), pos]
+        return [seq, chebyDist(pos, goal), pos]
     elif heuristic == "euc":
         return [seq, eucDist(pos, goal), pos]

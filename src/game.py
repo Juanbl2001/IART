@@ -71,6 +71,7 @@ def chooseSearch(window, font):
 
     running = True
     while running:
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit()
@@ -156,6 +157,11 @@ def aiMode(window, font):
 
     while solving == True:
         for i in seq:
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    exit()
+
             sleep(0.5)
             if agentPos == goal:
                 solving = False
@@ -171,7 +177,7 @@ def aiMode(window, font):
             elif i == "U":
                 agentPos = getUp(agentPos, maze)
 
-            if(oldPos != agentPos):
+            if oldPos != agentPos:
                 drawAgent(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], WHITE) #remove agent
                 """
                 if(i == "U" or i == "D"):

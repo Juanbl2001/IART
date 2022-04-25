@@ -7,6 +7,7 @@ from moves import *
 from utils import *
 import os
 
+
 def checkOption(pos):
 
     x = pos[0]
@@ -57,13 +58,14 @@ def mazeOptionsOtimize(y, num):
 
     return num + count
 
+
 def mazeCheckOption(pos):
 
     x = pos[0]
     y = pos[1]
     num = 0
     if x >= MAZESOP_X and x <= MAZESOP_X + MAZEOP_WIDTH:
-        number = mazeOptionsOtimize(y,num)
+        number = mazeOptionsOtimize(y, num)
     elif x >= MAZESOP_X + MAZESOP_XDIST and x <= MAZESOP_X + MAZESOP_XDIST + MAZEOP_WIDTH:
         num = 10
         number = mazeOptionsOtimize(y, num)
@@ -97,6 +99,7 @@ def chooseSearch(window, font):
 
             pygame.display.flip()
 
+
 def searchCheckOption(pos):
 
     x = pos[0]
@@ -113,6 +116,7 @@ def searchCheckOption(pos):
             return 4
 
     return 0
+
 
 def chooseHeuristic(window, font):
 
@@ -138,6 +142,7 @@ def chooseHeuristic(window, font):
 
             pygame.display.flip()
 
+
 def heuristicCheckOption(pos):
 
     x = pos[0]
@@ -152,6 +157,7 @@ def heuristicCheckOption(pos):
             return 3
         else:
             return 0
+
 
 def humanMode(window, font):
     mazeName = chooseMaze(window, font)
@@ -174,13 +180,14 @@ def humanMode(window, font):
         rectSizes = initMaze(window, maze, goal)
         pygame.display.flip()
         while(1):
-            #os.system('cls') #used to clear terminal
-            seq = input('Choose movement direction: \n L => Left \n R => Right \n U => Up \n D => Down \n H => Hint \n Q => Quit \n ->')
+            # os.system('cls') #used to clear terminal
+            seq = input(
+                'Choose movement direction: \n L => Left \n R => Right \n U => Up \n D => Down \n H => Hint \n Q => Quit \n ->')
             if seq.upper() == 'H':
-                print('Hint',hintVal ,': ',bestseq[hintVal], "\n")
+                print('Hint', hintVal, ': ', bestseq[hintVal], "\n")
                 sleep(2)
-                if(hintVal+1<len(bestseq)):
-                    hintVal+=1
+                if(hintVal+1 < len(bestseq)):
+                    hintVal += 1
                 else:
                     print("Solution: ", "".join(bestseq))
             elif seq.upper() == 'Q':
@@ -190,7 +197,7 @@ def humanMode(window, font):
                 break
         counter = 0
         while(counter < round(len(maze)*2) and solving):
-            counter+=1
+            counter += 1
             for i in seq:
                 for event in pygame.event.get():
                     if event.type == pygame.QUIT:
@@ -203,7 +210,7 @@ def humanMode(window, font):
 
                 oldPos = agentPos
                 if i == "R" or i == "r":
-                    agentPos = getRight(agentPos,maze)
+                    agentPos = getRight(agentPos, maze)
                 elif i == "L" or i == "l":
                     agentPos = getLeft(agentPos, maze)
                 elif i == "D" or i == "d":
@@ -211,19 +218,23 @@ def humanMode(window, font):
                 elif i == "U" or i == "u":
                     agentPos = getUp(agentPos, maze)
 
-                if oldPos != agentPos and counter!=0:
-                    drawAgent(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], GREEN) #remove agent
-                drawAgent(window, agentPos[0], agentPos[1], rectSizes[0], rectSizes[1],BLUE)
+                if oldPos != agentPos and counter != 0:
+                    # remove agent
+                    drawAgent(window, oldPos[0], oldPos[1],
+                              rectSizes[0], rectSizes[1], GREEN)
+                drawAgent(window, agentPos[0], agentPos[1],
+                          rectSizes[0], rectSizes[1], BLUE)
                 pygame.display.flip()
         if(not solving):
             print("\n!!Got it!!")
-            print("Here is the best answer: ",bestseq)
+            print("Here is the best answer: ", bestseq)
             return
         else:
             repeatTry = input("Sorry, want to try again? (y/n)")
-            drawAgent(window, agentPos[0], agentPos[1], rectSizes[0], rectSizes[1],WHITE)
-            agentPos = [4,0]
-            if(repeatTry.upper()=='Y'):
+            drawAgent(window, agentPos[0], agentPos[1],
+                      rectSizes[0], rectSizes[1], WHITE)
+            agentPos = [4, 0]
+            if(repeatTry.upper() == 'Y'):
                 continue
             else:
                 print("see you next time")
@@ -280,7 +291,7 @@ def aiMode(window, font):
 
             oldPos = agentPos
             if i == "R":
-                agentPos = getRight(agentPos,maze)
+                agentPos = getRight(agentPos, maze)
             elif i == "L":
                 agentPos = getLeft(agentPos, maze)
             elif i == "D":
@@ -289,8 +300,11 @@ def aiMode(window, font):
                 agentPos = getUp(agentPos, maze)
 
             if oldPos != agentPos:
-                drawAgent(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], GREEN) #remove agent
-                drawAgent(window, agentPos[0], agentPos[1], rectSizes[0], rectSizes[1],BLUE)
+                # remove agent
+                drawAgent(window, oldPos[0], oldPos[1],
+                          rectSizes[0], rectSizes[1], GREEN)
+                drawAgent(window, agentPos[0], agentPos[1],
+                          rectSizes[0], rectSizes[1], BLUE)
                 pygame.display.flip()
 
 
@@ -341,5 +355,6 @@ def main():
         pygame.display.flip()
 
     pygame.quit()
+
 
 main()

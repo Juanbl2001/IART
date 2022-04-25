@@ -26,6 +26,8 @@ def movedown(pos, maze):
     return 0
 
 # checks which way to move
+
+
 def move(seq, pos, goal, maze):
 
     if seq == []:

@@ -33,14 +33,15 @@ def getCostAstar():
     return costAstar
 
 def manDist(robotPos, finalPos):
-
     h = abs(robotPos[0] - finalPos[0]) + abs(robotPos[1] - finalPos[1])
-
     return h
 
 def eucDist(robotPos, finalPos):
-
     h = math.dist(robotPos, finalPos)
+    return h
+
+def chebyDist(robotPos, finalPos):
+    h = max(abs(robotPos[0] - finalPos[0]),abs(robotPos[1] - finalPos[1]))
     return h
 
 def dfs(start, goal, maze, sizeOfAnswer, seq=None, res = None, visited=None, limit=None):
@@ -66,9 +67,10 @@ def dfs(start, goal, maze, sizeOfAnswer, seq=None, res = None, visited=None, lim
         aux = [start[0], start[1]]
 
         if goal == move(seq, aux, goal, maze) and len(seq) == sizeOfAnswer:
-            print("Value DFS: " + str("".join(seq)))
+            #print("Value DFS: " + str("".join(seq)))
             res = seq
             return res
+        #print(seq)
 
         for movDir in ["U", "R", "L", "D"]:
             newSeq = list(seq)
@@ -95,7 +97,7 @@ def bfs(start, goal, maze):
         if goal == move(seq, aux, goal, maze):
             #print("\nCount in BFS: "+str(count))
             costBFS = count
-            print("Value BFS: " + str("".join(seq)))
+            #print("Value BFS: " + str("".join(seq)))
             return seq
 
         for movDir in ["L", "R", "U", "D"]:
@@ -127,12 +129,13 @@ def greedy(start, goal, maze, sizeOfAnswer):
 
         count += 1
         queue.remove(bestVal)
+        #(bestVal[0])
 
         # checks depth
         if goal == bestVal[2]:
             #print("\nCount in Greedy: "+str(count))
             costGreedy = count
-            print("Value Greedy: " + str(bestVal[0]))
+            #print("Value Greedy: " + str(bestVal[0]))
             return bestVal[0]
 
         if(len(bestVal[0]) < sizeOfAnswer):
@@ -164,12 +167,13 @@ def aStar(start, goal, maze, sizeOfAnswer):
         count += 1
 
         queue.remove(bestVal)
+        #(bestVal[0])
 
         # checks depth
         if goal == bestVal[2]:
             #print("\nCount in Astar: "+str(count))
             costAstar = count
-            print("Value Astar: " + str(bestVal[0]))
+            #print("Value Astar: " + str(bestVal[0]))
             return bestVal[0]
 
         if(len(bestVal[0]) < sizeOfAnswer):

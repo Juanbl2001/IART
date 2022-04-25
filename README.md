@@ -1,4 +1,4 @@
-# IART 2021/2022: Robot Maze
+# IART 2021/2022: Robot Mazes
 
 ## Team members
 - Juan Bellon [201908142]
@@ -15,6 +15,7 @@ Install libraries:
 pip install matplotlib
 
 pip install pygame
+
 </code>
 
 

@@ -7,8 +7,18 @@
 
 ## SETUP
 
+### UNIX (UBUNTU)
+
+Install libraries:
+
 <code>
-sudo apt-get install python3-tk
 pip install matplotlib
-pip install pyamaze
+
+pip install pygame
 </code>
+
+
+To run:
+
+`python3 game.py`
+

@@ -272,7 +272,7 @@ def aiMode(window, font):
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     exit()
-
+            print("Next move: ",i)
             sleep(0.5)
             if agentPos == goal:
                 solving = False

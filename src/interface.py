@@ -77,27 +77,28 @@ def drawAgent(window, x, y, rectWidth, rectHeight):
 
 def drawExit(window, exit, rectWidth, rectHeight):
 
-    '''
-    ratio = 0.05
-
-    # check which side is the exit
-    if exit[2] == "l" or exit[2] == "r":
-        width = ratio * rectWidth
-        height = rectHeight
-    else:
-        width = rectWidth
-        height = ratio * rectHeight
-
-    if exit[2] == "d" or exit[2] == "r":
-        x = rectWidth * (exit[0]+1) - width
-        y = rectHeight * (exit[1]+1) - height
-
-    else:
-        x = rectWidth * exit[0]
-        y = rectHeight * exit[1]
-    '''
-
     pygame.draw.rect(window,RED,(exit[0]*rectWidth,exit[1]*rectHeight,rectWidth,rectHeight))
+
+
+def drawWalls(window, elem, posX, posY, rectWidth, rectHeight):
+    # [u, d, l, r]
+    right = listBitwiseAnd(elem, r_wall)
+    left = listBitwiseAnd(elem, l_wall)
+    up = listBitwiseAnd(elem, u_wall)
+    down = listBitwiseAnd(elem, d_wall)
+
+    if right == r_wall:
+        drawWall(window, posX, posY, rectWidth, rectHeight, "r")
+
+    if left == l_wall:
+        drawWall(window, posX, posY, rectWidth, rectHeight, "l")
+
+    if up == u_wall:
+        drawWall(window, posX, posY, rectWidth, rectHeight, "u")
+
+    if down == d_wall:
+        drawWall(window, posX, posY, rectWidth, rectHeight, "d")
+
 
 def drawMaze(maze, window, rectWidth, rectHeight, goal):
 
@@ -115,24 +116,7 @@ def drawMaze(maze, window, rectWidth, rectHeight, goal):
             #draws rectangle no matter how many walls its drawing after
             drawRect(window,posX,posY,rectWidth,rectHeight)
 
-            # [u, d, l, r]
-            right = listBitwiseAnd(elem, r_wall)
-            left = listBitwiseAnd(elem, l_wall)
-            up = listBitwiseAnd(elem, u_wall)
-            down = listBitwiseAnd(elem, d_wall)
-
-            if right == r_wall:
-                drawWall(window, posX, posY, rectWidth, rectHeight, "r")
-
-            if left == l_wall:
-                drawWall(window, posX, posY, rectWidth, rectHeight, "l")
-
-            if up == u_wall:
-                drawWall(window, posX, posY, rectWidth, rectHeight, "u")
-
-            if down == d_wall:
-                drawWall(window, posX, posY, rectWidth, rectHeight, "d")
-
+            drawWalls(window, elem, posX, posY, rectWidth, rectHeight)
             posX += rectWidth
             count += 1
 
@@ -225,4 +209,5 @@ def initMaze(window,maze,goal):
     drawMaze(maze,window,rectWidth,rectHeight,goal)
     drawAgent(window,start[0],start[1],rectWidth,rectHeight)
 
+    return [rectWidth,rectHeight]
 #TESTING

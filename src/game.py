@@ -1,4 +1,5 @@
 import pygame
+from time import sleep
 from interface import *
 from ai import *
 from moves import *
@@ -174,7 +175,7 @@ def aiMode(window, font):
     mazeSolSize = globals()[mazeSolSizeName]
 
     seq = []
-    
+
     if method == "bfs":
         seq = bfs(start, goal, maze)
 
@@ -187,9 +188,31 @@ def aiMode(window, font):
     elif method == "astar":
         seq = aStar(start, goal, maze, mazeSolSize)
 
+    rectSizes = initMaze(window, maze, goal)
 
-    print(seq)
-    #initMaze(window, maze, goal)
+    agentPos = start
+    solving = True
+    while solving == True:
+        for i in seq:
+            sleep(1)
+            if agentPos == goal:
+                solving = False
+                break
+
+            oldPos = agentPos
+            if i == "R":
+                agentPos = getRight(agentPos,maze)
+            elif i == "L":
+                agentPos = getLeft(agentPos, maze)
+            elif i == "D":
+                agentPos = getDown(agentPos, maze)
+            elif i == "U":
+                agentPos = getUp(agentPos, maze)
+
+            #drawRect(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1])
+            #drawWalls(window, , oldPos[0]*BLOCK, oldPos[1]*BLOCK, rectSizes[0], rectSizes[1])
+            drawAgent(window, agentPos[0], agentPos[1], rectSizes[0], rectSizes[1])
+            pygame.display.flip()
 
 def main():
 

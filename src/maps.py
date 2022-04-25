@@ -79,7 +79,7 @@ p5 = [[ulr_wall, ul_wall, u_wall, ur_wall, ulr_wall],
       [dl_wall, dr_wall, dl_wall, d_wall, dr_wall]]
 p5SolSize = 5
 
-p6 = [[ulr_wall, u_wall, ur_wall, ul_wall, udr_wall],
+p6 = [[ul_wall, u_wall, ur_wall, ul_wall, udr_wall],
       [dlr_wall, lr_wall, dl_wall, d_wall, ur_wall],
       [ul_wall, no_wall, u_wall, u_wall, r_wall],
       [l_wall, no_wall, no_wall, no_wall, r_wall],

@@ -75,8 +75,13 @@ def drawAgent(window, x, y, rectWidth, rectHeight, color):
     radius = 0.06 * aux
     pygame.draw.circle(window,color,(y*BLOCK+rectWidth/2,x*BLOCK+rectHeight/2),radius)
 
-def drawExit(window, exit, rectWidth, rectHeight):
+def drawPathH(window, x, y, rectWidth, rectHeight, color):
+    pygame.draw.line(window,color,(y*BLOCK+rectWidth/2,x*BLOCK+rectHeight/2),(y*BLOCK+rectWidth*2,x*BLOCK+rectHeight/2),3)
 
+def drawPathV(window, x, y, rectWidth, rectHeight, color):
+    pygame.draw.line(window,color,(y*BLOCK+rectWidth/2,x*BLOCK-rectHeight/2),(y*BLOCK+rectWidth/2,x*BLOCK+rectHeight/2),3)
+
+def drawExit(window, exit, rectWidth, rectHeight):
     pygame.draw.rect(window,RED,(exit[1]*rectWidth,exit[0]*rectHeight,rectWidth,rectHeight))
 
 

@@ -1,3 +1,4 @@
+from ctypes.wintypes import RGB
 import pygame
 from time import sleep
 from interface import *
@@ -151,16 +152,14 @@ def aiMode(window, font):
 
     agentPos = start
     solving = True
-    print("Sequence:", seq, "\nSolution:")
+    print("Sequence: ", seq)
 
     while solving == True:
         for i in seq:
-            sleep(1)
+            sleep(0.1)
             if agentPos == goal:
                 solving = False
                 break
-
-            print(i)
 
             oldPos = agentPos
             if i == "R":
@@ -172,9 +171,16 @@ def aiMode(window, font):
             elif i == "U":
                 agentPos = getUp(agentPos, maze)
 
-            drawAgent(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], WHITE)
-            drawAgent(window, agentPos[0], agentPos[1], rectSizes[0], rectSizes[1],BLUE)
-            pygame.display.flip()
+            if(oldPos != agentPos):
+                drawAgent(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], WHITE) #remove agent
+                if(i == "U" or i == "D"):
+                    print(i,i)
+                    drawPathV(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], BLACK)
+                else:
+                    print(i)
+                    drawPathH(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], BLACK)
+                drawAgent(window, agentPos[0], agentPos[1], rectSizes[0], rectSizes[1],RGB(16, 44, 53))
+                pygame.display.flip()
 
 def main():
 

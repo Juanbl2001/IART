@@ -69,8 +69,49 @@ def human_game(maze, pos, fin):
 
 def humanMode(window, font):
 
-    print("humanmode")
-    drawHumanOptions(window,font)
+    drawHumanOptions(window, font)
+
+    running = True
+    while running:
+        print("humanmode")
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                running = False
+
+            elif event.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()
+                op = humanCheckOption(pos)
+
+                if op >= 1 and op <= NUMBER_OF_MAZES:
+                    mazeName = "p" + str(op)
+                    maze = globals()[mazeName]
+                    initMaze(window, maze, goal)
+                    running = False
+
+            pygame.display.flip()
+
+def humanCheckOption(pos):
+
+    posX = pos[0]
+    posY = pos[1]
+    x = HUMAN_MAZESOP_X
+    y = HUMAN_MAZESOP_Y
+
+    mazeNumber = 1
+    for i in range(NUMBER_OF_MAZES):
+        #updates x coordenate (2nd column)
+        if i == int(NUMBER_OF_MAZES/2):
+            x += HUMAN_MAZESOP_XDIST
+            y = HUMAN_MAZESOP_Y
+
+        if posX >= x and posX <= x+HUMAN_OP_WIDTH and posY >= y and posY <= y + HUMAN_OP_HEIGHT:
+            print(mazeNumber)
+            return mazeNumber
+        y += HUMAN_MAZESOP_YDIST
+        mazeNumber += 1
+
+    return 0
+
     '''
     initMaze(window, p1, goal)
     # map selector
@@ -138,17 +179,13 @@ def main():
 
             elif event.type == pygame.MOUSEBUTTONUP:
                 pos = pygame.mouse.get_pos()
-                if menu == True:
-                    menu = False
-                    op = checkOption(pos)
-                    if op == 1:
-                        humanMode(window,font)
-                    elif op == 2:
-                        aiMode(window)
-                    elif op == 3:
-                        running = False
-                    else:
-                        menu = True
+                op = checkOption(pos)
+                if op == 1:
+                    humanMode(window,font)
+                elif op == 2:
+                    aiMode(window)
+                elif op == 3:
+                    running = False
 
         # Flip the display
         pygame.display.flip()

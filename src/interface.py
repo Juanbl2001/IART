@@ -23,11 +23,19 @@ OP_WIDTH = 200
 OP_HEIGHT = 30
 
 #HUMAN MODE OPTIONS POSITION
+NUMBER_OF_MAZES = 20
+HUMAN_MAZESOP_Y = 100
+HUMAN_MAZESOP_X = 100
+HUMAN_MAZESOP_XDIST = 200
+HUMAN_MAZESOP_YDIST = 35
+HUMAN_OP_WIDTH = 100
+HUMAN_OP_HEIGHT = 30
 
 # set up pygame window
 BLOCK = 100
 FPS = 60
 mazeSize = 5
+NUMBER_OF_MAZES = 20
 
 
 def drawRect(window, posX, posY, rectWidth, rectHeight):
@@ -164,19 +172,18 @@ def drawHumanOptions(window,font):
     xDist = 200
     yDist = 35
 
-    x = 100
+    x = HUMAN_MAZESOP_X
 
     mazeNumber = 1
     #20 is the number of mazes
-    for i in range(20):
-        y = 100
-        for i in range(10):
+    for i in range(NUMBER_OF_MAZES):
+        y = HUMAN_MAZESOP_Y
+        for i in range(int(NUMBER_OF_MAZES/2)):
             text = "Maze " + str(mazeNumber)
             drawText(window, font, text, x, y)
             mazeNumber += 1
-            y += yDist
-        x += xDist
-
+            y += HUMAN_MAZESOP_YDIST
+        x += HUMAN_MAZESOP_XDIST
 
 
 def initMaze(window,maze,goal):

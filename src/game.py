@@ -202,13 +202,13 @@ def humanMode(window, font):
                     break
 
                 oldPos = agentPos
-                if i == "R":
+                if i == "R" or i == "r":
                     agentPos = getRight(agentPos,maze)
-                elif i == "L":
+                elif i == "L" or i == "l":
                     agentPos = getLeft(agentPos, maze)
-                elif i == "D":
+                elif i == "D" or i == "d":
                     agentPos = getDown(agentPos, maze)
-                elif i == "U":
+                elif i == "U" or i == "u":
                     agentPos = getUp(agentPos, maze)
 
                 if oldPos != agentPos and counter!=0:

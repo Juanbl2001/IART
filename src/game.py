@@ -249,11 +249,11 @@ def aiMode(window, font):
 
     elif method == "greedy":
         heuristic = chooseHeuristic(window, font)
-        seq = greedy(start, goal, maze, mazeSolSize)
+        seq = greedy(start, goal, maze, mazeSolSize, heuristic)
 
     elif method == "astar":
         heuristic = chooseHeuristic(window, font)
-        seq = aStar(start, goal, maze, mazeSolSize)
+        seq = aStar(start, goal, maze, mazeSolSize, heuristic)
 
     else:
         return

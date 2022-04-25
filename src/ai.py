@@ -96,13 +96,13 @@ def bfs(start, goal, maze):
             queue.append(newSeq)
 
 
-def greedy(start, goal, maze, sizeOfAnswer):
+def greedy(start, goal, maze, sizeOfAnswer, heuristic):
     global costGreedy
     queue = []
-    queue.append(setUp("L", start, goal, maze))
-    queue.append(setUp("R", start, goal, maze))
-    queue.append(setUp("U", start, goal, maze))
-    queue.append(setUp("D", start, goal, maze))
+    queue.append(setUp("L", start, goal, maze, heuristic))
+    queue.append(setUp("R", start, goal, maze, heuristic))
+    queue.append(setUp("U", start, goal, maze, heuristic))
+    queue.append(setUp("D", start, goal, maze, heuristic))
     count = 0
 
     # by storing the value in the queue we dont need to re-search the last position of each value each time
@@ -130,17 +130,17 @@ def greedy(start, goal, maze, sizeOfAnswer):
 
         if(len(bestVal[0]) < sizeOfAnswer):
             for movDir in "LDUR":
-                newSeq = setUp(bestVal[0]+movDir, start, goal, maze)
+                newSeq = setUp(bestVal[0]+movDir, start, goal, maze, heuristic)
                 queue.append(newSeq)
 
 
-def aStar(start, goal, maze, sizeOfAnswer):
+def aStar(start, goal, maze, sizeOfAnswer, heuristic):
     global costAstar
     queue = []
-    queue.append(setUp("L", start, goal, maze))
-    queue.append(setUp("R", start, goal, maze))
-    queue.append(setUp("U", start, goal, maze))
-    queue.append(setUp("D", start, goal, maze))
+    queue.append(setUp("L", start, goal, maze, heuristic))
+    queue.append(setUp("R", start, goal, maze, heuristic))
+    queue.append(setUp("U", start, goal, maze, heuristic))
+    queue.append(setUp("D", start, goal, maze, heuristic))
     count = 0
 
     # by storing the value in the queue we dont need to re-search the last position of each value each time
@@ -168,13 +168,18 @@ def aStar(start, goal, maze, sizeOfAnswer):
 
         if(len(bestVal[0]) < sizeOfAnswer):
             for movDir in "LDUR":
-                newSeq = setUp(bestVal[0]+movDir, start, goal, maze)
+                newSeq = setUp(bestVal[0]+movDir, start, goal, maze, heuristic)
                 queue.append(newSeq)
 
 
 #function to store essencial values for A* and Greedy
-def setUp(seq, start, goal, maze):
+def setUp(seq, start, goal, maze, heuristic):
     aux = [start[0], start[1]]
     # get last position achievable with that sequence
     pos = move(seq, aux, goal, maze)
-    return [seq, manDist(pos, goal), pos]
+    if heuristic == "man":
+        return [seq, manDist(pos, goal), pos]
+    elif heuristic == "sheby":
+        return [seq, shebyDist(pos, goal), pos]
+    elif heuristic == "euc":
+        return [seq, eucDist(pos, goal), pos]

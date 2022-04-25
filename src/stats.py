@@ -9,6 +9,11 @@ from time import *
 from stats import *
 import matplotlib.pyplot as plt
 
+"""
+This file is only for testing and graphs, to test run python3 stats.py
+You can change the values of the heuristics in the lines marked with (+)
+"""
+
 def stats(pt,s):
     p = globals()[pt]
 
@@ -19,11 +24,11 @@ def stats(pt,s):
 
     # Greedy
     start_greedy = time()
-    ans=greedy(start, goal,p,s)
+    ans=greedy(start, goal,p,s,"man") #(+)
     end_greedy = time()
     time_greedy = float(end_greedy-start_greedy)
-    print("Time Greedy: ",time_greedy)
-    print(ans)
+    #print("Time Greedy: ",time_greedy)
+    #print(ans)
 
     # BFS
     start_bfs = time()
@@ -33,12 +38,12 @@ def stats(pt,s):
 
     # A*
     start_astar = time()
-    aStar(start, goal, p, s)
+    aStar(start, goal, p, s,"man")
     end_astar = time()
     time_astar = float(end_astar-start_astar)
-    print("Time A*: ",time_astar)
+    #print("Time A*: ",time_astar) #(+)
 
-    print("Greedy ",getCostGreedy()," A*",getCostAstar())
+    #print("Greedy ",getCostGreedy()," A*",getCostAstar())
 
     TimeEfficiency(time_dfs, time_bfs, time_greedy, time_astar, s)
     SpaceEfficiency(getCostDfs(),getCostBfs(),getCostGreedy(),getCostAstar(),s)

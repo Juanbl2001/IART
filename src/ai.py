@@ -1,15 +1,3 @@
-# Using A*
-# Cost -> Number of moves until it reaches the exit
-# Heuristic -> Manhattan distance
-
-from calendar import c
-from cmath import sqrt
-#from curses import nl
-from importlib.resources import path
-from lib2to3.pgen2.token import NEWLINE
-from queue import *
-import queue
-from time import sleep
 from moves import *
 from utils import *
 import math
@@ -32,15 +20,18 @@ def getCostAstar():
     global costAstar    
     return costAstar
 
+# manhattan distance heuristic calculator
 def manDist(robotPos, finalPos):
     h = abs(robotPos[0] - finalPos[0]) + abs(robotPos[1] - finalPos[1])
     return h
 
+# euclidean distance heuristic calculator
 def eucDist(robotPos, finalPos):
     h = math.dist(robotPos, finalPos)
     return h
 
-def chebyDist(robotPos, finalPos):
+# Shebychev distance heuristic calculator
+def shebyDist(robotPos, finalPos):
     h = max(abs(robotPos[0] - finalPos[0]),abs(robotPos[1] - finalPos[1]))
     return h
 
@@ -67,10 +58,9 @@ def dfs(start, goal, maze, sizeOfAnswer, seq=None, res = None, visited=None, lim
         aux = [start[0], start[1]]
 
         if goal == move(seq, aux, goal, maze) and len(seq) == sizeOfAnswer:
-            #print("Value DFS: " + str("".join(seq)))
+    
             res = seq
             return res
-        #print(seq)
 
         for movDir in ["U", "R", "L", "D"]:
             newSeq = list(seq)
@@ -95,9 +85,9 @@ def bfs(start, goal, maze):
         aux = [start[0], start[1]]
 
         if goal == move(seq, aux, goal, maze):
-            #print("\nCount in BFS: "+str(count))
+            
             costBFS = count
-            #print("Value BFS: " + str("".join(seq)))
+            
             return seq
 
         for movDir in ["L", "R", "U", "D"]:
@@ -133,9 +123,9 @@ def greedy(start, goal, maze, sizeOfAnswer):
 
         # checks depth
         if goal == bestVal[2]:
-            #print("\nCount in Greedy: "+str(count))
+            
             costGreedy = count
-            #print("Value Greedy: " + str(bestVal[0]))
+            
             return bestVal[0]
 
         if(len(bestVal[0]) < sizeOfAnswer):
@@ -171,9 +161,9 @@ def aStar(start, goal, maze, sizeOfAnswer):
 
         # checks depth
         if goal == bestVal[2]:
-            #print("\nCount in Astar: "+str(count))
+            
             costAstar = count
-            #print("Value Astar: " + str(bestVal[0]))
+            
             return bestVal[0]
 
         if(len(bestVal[0]) < sizeOfAnswer):

@@ -1,5 +1,3 @@
-import itertools
-
 # logical OR between two lists. for example: listBitWiseOr([1,0],[0,1]) = [1,1]
 # resultList = (L1[0] | L2[0]) + (L1[1] | L2[1]) + ... (L1[n] | L2[n])
 def listBitwiseOr(c1, c2):
@@ -24,14 +22,6 @@ def check(pos, maze):
     if (maze[pos[0]][pos[1]][1] != 1):
         possibleMoves.append([pos[0]+1, pos[1]])
     return possibleMoves
-
-# generates a sequence of moves
-def generateSeq():
-    stuff = ["L", "R", "U", "D"]
-    for L in range(0, 10):
-        for subset in itertools.combinations_with_replacement(stuff, L):
-            print(subset)
-
 
 def get_xsize(maze):
     return len(maze[0])

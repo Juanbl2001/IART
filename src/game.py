@@ -134,7 +134,7 @@ def chooseHeuristic(window, font):
                 elif op == 2:
                     return "euc"
                 elif op == 3:
-                    return "sheby"
+                    return "cheby"
 
             pygame.display.flip()
 

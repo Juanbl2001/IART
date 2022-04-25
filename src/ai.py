@@ -30,8 +30,8 @@ def eucDist(robotPos, finalPos):
     h = math.dist(robotPos, finalPos)
     return h
 
-# Shebychev distance heuristic calculator
-def shebyDist(robotPos, finalPos):
+# Chebyshev distance heuristic calculator
+def chebyDist(robotPos, finalPos):
     h = max(abs(robotPos[0] - finalPos[0]),abs(robotPos[1] - finalPos[1]))
     return h
 
@@ -179,7 +179,7 @@ def setUp(seq, start, goal, maze, heuristic):
     pos = move(seq, aux, goal, maze)
     if heuristic == "man":
         return [seq, manDist(pos, goal), pos]
-    elif heuristic == "sheby":
-        return [seq, shebyDist(pos, goal), pos]
+    elif heuristic == "cheby":
+        return [seq, chebyDist(pos, goal), pos]
     elif heuristic == "euc":
         return [seq, eucDist(pos, goal), pos]

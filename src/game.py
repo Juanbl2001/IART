@@ -21,10 +21,11 @@ def checkOption(pos):
         else:
             return 0
 
-def humanMode():
-    print("hymanmode")
+def humanMode(window):
+    print("humanmode")
+    initMaze(window, p1, goal, BLOCK)
 
-def aiMode():
+def aiMode(window):
     print("aimode")
 
 def main():
@@ -44,7 +45,6 @@ def main():
 
     window = pygame.display.set_mode([width, height])
     drawMenu(window, 1)
-    #initMaze(window,p1,goal,BLOCK)
 
     running = True
     menu = True
@@ -62,9 +62,9 @@ def main():
                     menu = False
                     op = checkOption(pos)
                     if op == 1:
-                        humanMode()
+                        humanMode(window)
                     elif op == 2:
-                        aiMode()
+                        aiMode(window)
                     elif op == 3:
                         running = False
                     else:

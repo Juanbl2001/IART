@@ -7,7 +7,6 @@ from ai import *
 from moves import *
 from time import *
 from stats import *
-from numpy import *
 import matplotlib.pyplot as plt
 
 """

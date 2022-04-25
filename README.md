@@ -22,3 +22,5 @@ To run:
 
 `python3 game.py`
 
+## Note
+When playing in human mode, the user's input is given in the terminal and not in the graphical interface.

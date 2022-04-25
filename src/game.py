@@ -169,8 +169,26 @@ def aiMode(window, font):
     maze = globals()[mazeName]
     method = chooseSearch(window, font)
 
-    print(method)
+    #print(method)
+    mazeSolSizeName = mazeName + "SolSize"
+    mazeSolSize = globals()[mazeSolSizeName]
 
+    seq = []
+    
+    if method == "bfs":
+        seq = bfs(start, goal, maze)
+
+    elif method == "dps":
+        seq = dfs(start, goal, maze, mazeSolSize)
+
+    elif method == "greedy":
+        seq = greedy(start, goal, maze, mazeSolSize)
+
+    elif method == "astar":
+        seq = aStar(start, goal, maze, mazeSolSize)
+
+
+    print(seq)
     #initMaze(window, maze, goal)
 
 def main():

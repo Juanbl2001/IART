@@ -161,7 +161,7 @@ def humanMode(window, font):
 
     mazeSolSizeName = mazeName + "SolSize"
     mazeSolSize = globals()[mazeSolSizeName]
-    bestseq = greedy(start, goal, maze, mazeSolSize)
+    bestseq = greedy(start, goal, maze, mazeSolSize, "euc")
     seq = []
 
     sleep(1)

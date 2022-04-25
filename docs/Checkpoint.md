@@ -33,12 +33,12 @@ Any (x,y) and place(x,y) = 2.
 
 ### Operators (Name, Preconditions, Effect, Cost)
 
-| Name  | Preconditions             | Effect    | Cost |
-| ----- | ------------------------- | --------- | ---- |
-| UP    | y>0 & place(x,y)!=1       | y = y-1   |  1   | 
-| DOWN  | y<ySize & place(x,y)!=1   | y = y+1   |  1   |
-| LEFT  | x>0 & place(x,y)!=1       | x = x-1   |  1   |
-| RIGHT | x<xSize & place(x,y)!=1   | x = x+1   |  1   |
+| Name  | Preconditions             | Effect    | Cost                                            |
+| ----- | ------------------------- | --------- | ----------------------------------------------- |
+| UP    | y>0 & place(x,y)!=1       | y = y-1   |  Number of times that appears in the sequence   | 
+| DOWN  | y<ySize & place(x,y)!=1   | y = y+1   |  Number of times that appears in the sequence   |
+| LEFT  | x>0 & place(x,y)!=1       | x = x-1   |  Number of times that appears in the sequence   |
+| RIGHT | x<xSize & place(x,y)!=1   | x = x+1   |  Number of times that appears in the sequence   |
 
 ### Heuristic function
 

@@ -1,6 +1,5 @@
 import itertools
 
-
 def listBitwiseOr(c1, c2):
     list = [i | j for i, j in zip(c1, c2)]
     return list

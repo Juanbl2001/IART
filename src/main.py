@@ -64,7 +64,7 @@ def human_mode():
         else:
             print('INVALID OPTION!\n')
 
-
+"""
 def human_game(maze, pos, fin):
 
     # Calculate maze dimensions and exit position
@@ -111,7 +111,7 @@ def human_game(maze, pos, fin):
     print('YOU WON!!!\n')
     return
 
-
+"""
 mapOption = str(input("Enter Map Number: "))
 mapOption = "p"+mapOption
 s = int(input("Enter Answer Size: "))

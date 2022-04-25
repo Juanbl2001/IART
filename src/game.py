@@ -5,6 +5,7 @@ from interface import *
 from ai import *
 from moves import *
 from utils import *
+import os
 
 def checkOption(pos):
 
@@ -115,12 +116,83 @@ def searchCheckOption(pos):
 
 
 def humanMode(window, font):
-
     mazeName = chooseMaze(window, font)
     if mazeName == 0:
         return
     maze = globals()[mazeName]
-    initMaze(window, maze, goal)
+
+    mazeSolSizeName = mazeName + "SolSize"
+    mazeSolSize = globals()[mazeSolSizeName]
+    bestseq = greedy(start, goal, maze, mazeSolSize)
+    seq = []
+
+    sleep(1)
+
+    agentPos = start
+    solving = True
+
+    while(solving):
+        hintVal = 0
+        rectSizes = initMaze(window, maze, goal)
+        pygame.display.flip()
+        while(1):
+            #os.system('cls') #used to clear terminal
+            seq = input('Choose movement direction: \n L => Left \n R => Right \n U => Up \n D => Down \n H => Hint \n Q => Quit \n ->')
+            if seq.upper() == 'H':
+                print('Hint',hintVal ,': ',bestseq[hintVal], "\n")
+                sleep(2)
+                if(hintVal+1<len(bestseq)):
+                    hintVal+=1
+                else:
+                    print("Solution: ", "".join(bestseq))
+            elif seq.upper() == 'Q':
+                print('BETTER LUCK NEXT TRY!!!\n')
+                return
+            else:
+                break
+        counter = 0
+        while(counter < round(len(maze)*2) and solving):
+            counter+=1
+            for i in seq:
+                for event in pygame.event.get():
+                    if event.type == pygame.QUIT:
+                        exit()
+
+                sleep(0.5)
+                if agentPos == goal:
+                    solving = False
+                    break
+
+                oldPos = agentPos
+                if i == "R":
+                    agentPos = getRight(agentPos,maze)
+                elif i == "L":
+                    agentPos = getLeft(agentPos, maze)
+                elif i == "D":
+                    agentPos = getDown(agentPos, maze)
+                elif i == "U":
+                    agentPos = getUp(agentPos, maze)
+
+                if oldPos != agentPos and counter!=0:
+                    drawAgent(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], GREEN) #remove agent
+                drawAgent(window, agentPos[0], agentPos[1], rectSizes[0], rectSizes[1],BLUE)
+                pygame.display.flip()
+        if(not solving):
+            print("\n!!Got it!!")
+            print("Here is the best answer: ",bestseq)
+            return
+        else:
+            repeatTry = input("Sorry, want to try again? (y/n)")
+            drawAgent(window, agentPos[0], agentPos[1], rectSizes[0], rectSizes[1],WHITE)
+            agentPos = [4,0]
+            if(repeatTry.upper()=='Y'):
+                continue
+            else:
+                print("see you next time")
+                return
+
+
+
 
 
 def aiMode(window, font):
@@ -134,8 +206,6 @@ def aiMode(window, font):
 
     mazeSolSizeName = mazeName + "SolSize"
     mazeSolSize = globals()[mazeSolSizeName]
-
-    seq = []
 
     if method == "bfs":
         seq = bfs(start, goal, maze)
@@ -183,9 +253,8 @@ def aiMode(window, font):
                 agentPos = getUp(agentPos, maze)
 
             if oldPos != agentPos:
-                drawAgent(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], WHITE) #remove agent
+                drawAgent(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], GREEN) #remove agent
                 """
-    
                 if(i == "U" or i == "D"):
                     #print(i,i)
                     drawPathV(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], BLACK)
@@ -227,10 +296,10 @@ def human_game(maze, pos, fin):
     while pos[0] != fin[0] or pos[1] != fin[1]:
         for i in mov:
             while pos[0] != fin[0] or pos[1] != fin[1]:
-                print(manDist(pos, fin))  # Print heuristic
+                #print(manDist(pos, fin))  # Print heuristic
 
-                print(getCost())  # Print Cost
-                addCost()  # Add Cost, initially +1 per move
+                #print(getCost())  # Print Cost
+                #addCost()  # Add Cost, initially +1 per move
 
                 #printMaze(maze, pos, xsize, ysize)
 
@@ -291,6 +360,7 @@ def main():
                 op = checkOption(pos)
                 if op == 1:
                     humanMode(window, font)
+                    #print("end human mode")
                 elif op == 2:
                     aiMode(window, font)
                 elif op == 3:

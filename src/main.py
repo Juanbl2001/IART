@@ -111,7 +111,7 @@ def human_game(maze, pos, fin):
     print('YOU WON!!!\n')
     return
 
-
+'''
 mapOption = str(input("Enter Map Number: "))
 mapOption = "p"+mapOption
 s = int(input("Enter Answer Size: "))
@@ -146,3 +146,5 @@ def helperFunc(pt,s):
     SpaceEfficiency(getCostDfs(),getCostBfs(),getCostGreedy(),getCostAstar(),s)
 
 #helperFunc(mapOption,s)
+'''
+print(dfs(start, goal, p20, 8))

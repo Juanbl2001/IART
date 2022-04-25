@@ -1,6 +1,3 @@
-from time import *
-
-
 def moveright(pos, maze):
     if((maze[pos[0]][pos[1]][3] != 1)):
         pos[1] += 1
@@ -28,7 +25,7 @@ def movedown(pos, maze):
         return 1
     return 0
 
-
+# checks which way to move
 def move(seq, pos, goal, maze):
 
     if seq == []:

@@ -3,14 +3,11 @@
 from tracemalloc import start
 from maps import *
 from utils import *
-from typing import Counter
 from ai import *
 from moves import *
 from time import *
 from stats import *
-import numpy as np
 import matplotlib.pyplot as plt
-import itertools
 
 def stats(pt,s):
     p = globals()[pt]

@@ -43,27 +43,32 @@ def chooseMaze(window, font):
             pygame.display.flip()
 
 
+def mazeOptionsOtimize(y, num):
+
+    curY = MAZESOP_Y
+    count = 1
+    for i in range(int(NUMBER_OF_MAZES / 2)):
+        if y >= curY and y <= curY + MAZEOP_HEIGHT:
+            #print(num + count)
+            break
+        count += 1
+        curY += MAZESOP_YDIST
+
+    return num + count
+
 def mazeCheckOption(pos):
 
-    posX = pos[0]
-    posY = pos[1]
-    x = MAZESOP_X
-    y = MAZESOP_Y
+    x = pos[0]
+    y = pos[1]
+    num = 0
+    if x >= MAZESOP_X and x <= MAZESOP_X + MAZEOP_WIDTH:
+        number = mazeOptionsOtimize(y,num)
+    elif x >= MAZESOP_X + MAZESOP_XDIST and x <= MAZESOP_X + MAZESOP_XDIST + MAZEOP_WIDTH:
+        num = 10
+        number = mazeOptionsOtimize(y, num)
 
-    mazeNumber = 1
-    for i in range(NUMBER_OF_MAZES):
-        #updates x coordenate (2nd column)
-        if i == int(NUMBER_OF_MAZES/2):
-            x += MAZESOP_XDIST
-            y = MAZESOP_Y
+    return number
 
-        if posX >= x and posX <= x+MAZEOP_WIDTH and posY >= y and posY <= y + MAZEOP_HEIGHT:
-            print(mazeNumber)
-            return mazeNumber
-        y += MAZESOP_YDIST
-        mazeNumber += 1
-
-    return 0
 
 def chooseSearch(window, font):
 
@@ -71,7 +76,7 @@ def chooseSearch(window, font):
 
     running = True
     while running:
-        
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 exit()
@@ -180,6 +185,7 @@ def aiMode(window, font):
             if oldPos != agentPos:
                 drawAgent(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], WHITE) #remove agent
                 """
+    
                 if(i == "U" or i == "D"):
                     #print(i,i)
                     drawPathV(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], BLACK)

@@ -8,7 +8,7 @@ from typing import Counter
 from ai import *
 from moves import *
 from time import *
-from stats import *
+#from stats import *
 
 def main():
 

@@ -5,14 +5,14 @@ from maps import *
 WHITE = (255, 255, 255)
 GREEN = (0, 51, 0)
 BLUE = (0, 51, 204)
-YELLOW = (255 ,255 ,0)
+YELLOW = (255, 255, 0)
 RED = (204, 0, 0)
-BLACK = (0,0,0)
+BLACK = (0, 0, 0)
 
 # FONTS
 FONT = 'calibri'
 
-#MENU OPTIONS POSITION
+# MENU OPTIONS POSITION
 Y_DIST = 75
 OPTIONS_X = 150
 OPTION1_Y = 200
@@ -21,7 +21,7 @@ OPTION3_Y = OPTION2_Y + Y_DIST
 OP_WIDTH = 200
 OP_HEIGHT = 30
 
-#MAZE OPTIONS POSITION
+# MAZE OPTIONS POSITION
 NUMBER_OF_MAZES = 20
 MAZESOP_Y = 100
 MAZESOP_X = 100
@@ -30,13 +30,13 @@ MAZESOP_YDIST = 35
 MAZEOP_WIDTH = 100
 MAZEOP_HEIGHT = 30
 
-#SEARCH OPTIONS POSITION
+# SEARCH OPTIONS POSITION
 SEARCH_OPTION1_Y = 180
 SEARCH_OPTION2_Y = SEARCH_OPTION1_Y + Y_DIST
 SEARCH_OPTION3_Y = SEARCH_OPTION2_Y + Y_DIST
 SEARCH_OPTION4_Y = SEARCH_OPTION3_Y + Y_DIST
 
-#HEURISTIC OPTION POSITION
+# HEURISTIC OPTION POSITION
 HEURISTIC_OPTIONS_X = 110
 HEURISTIC_OP_WIDTH = 160
 
@@ -47,6 +47,8 @@ mazeSize = 5
 NUMBER_OF_MAZES = 20
 
 # draws a rectangles, mostly used for drawing each maze's cell
+
+
 def drawRect(window, posX, posY, rectWidth, rectHeight):
 
     pygame.draw.rect(window, WHITE, (posX, posY, rectWidth, rectHeight))
@@ -54,6 +56,8 @@ def drawRect(window, posX, posY, rectWidth, rectHeight):
 # draws a wall
 # first if -> depending on the side the wall is located it can be either horizontal ou vertical
 # second if -> moves the wall to the right or down side of the cell
+
+
 def drawWall(window, posX, posY, rectWidth, rectHeight, side):
 
     ratio = 0.05
@@ -71,6 +75,8 @@ def drawWall(window, posX, posY, rectWidth, rectHeight, side):
     pygame.draw.rect(window, BLACK, (posX, posY, wallWidth, wallHeight))
 
 # draw robot's current position mostly
+
+
 def drawAgent(window, x, y, rectWidth, rectHeight, color):
 
     if window.get_width() < window.get_height():
@@ -79,13 +85,19 @@ def drawAgent(window, x, y, rectWidth, rectHeight, color):
         aux = window.get_height()
 
     radius = 0.06 * aux
-    pygame.draw.circle(window,color,(y*BLOCK+rectWidth/2,x*BLOCK+rectHeight/2),radius)
+    pygame.draw.circle(window, color, (y*BLOCK+rectWidth /
+                       2, x*BLOCK+rectHeight/2), radius)
 
 # draws maze's goal as a red colored cell
+
+
 def drawExit(window, exit, rectWidth, rectHeight):
-    pygame.draw.rect(window,RED,(exit[1]*rectWidth,exit[0]*rectHeight,rectWidth,rectHeight))
+    pygame.draw.rect(
+        window, RED, (exit[1]*rectWidth, exit[0]*rectHeight, rectWidth, rectHeight))
 
 # checks which walls are to be drawn
+
+
 def drawWalls(window, elem, posX, posY, rectWidth, rectHeight):
     # [u, d, l, r]
     right = listBitwiseAnd(elem, r_wall)
@@ -106,9 +118,11 @@ def drawWalls(window, elem, posX, posY, rectWidth, rectHeight):
         drawWall(window, posX, posY, rectWidth, rectHeight, "d")
 
 # draws maze = background + cells + exit + walls
+
+
 def drawMaze(maze, window, rectWidth, rectHeight, goal):
 
-    window.fill((255,255,255))
+    window.fill((255, 255, 255))
 
     posY = 0
     y = 0
@@ -118,8 +132,8 @@ def drawMaze(maze, window, rectWidth, rectHeight, goal):
 
         for elem in line:
 
-            #draws rectangle no matter how many walls its drawing after
-            drawRect(window,posX,posY,rectWidth,rectHeight)
+            # draws rectangle no matter how many walls its drawing after
+            drawRect(window, posX, posY, rectWidth, rectHeight)
 
             drawWalls(window, elem, posX, posY, rectWidth, rectHeight)
             posX += rectWidth
@@ -130,26 +144,30 @@ def drawMaze(maze, window, rectWidth, rectHeight, goal):
 
 # render and display the text
 # used mainly for menus (options)
+
+
 def drawText(window, font, text, x, y):
     textRenderer = font.render(text, False, WHITE)
     window.blit(textRenderer, (x, y))
 
 # draws the game's initial menu
+
+
 def drawMenu(window, font):
 
     window.fill(BLACK)
 
-    #Choose option
+    # Choose option
     text = "Choose Option"
     x = 160
     y = 60
     drawText(window, font, text, x, y)
 
-    #OP1 - Human mode
+    # OP1 - Human mode
     text = "1. Human Mode"
     drawText(window, font, text, OPTIONS_X, OPTION1_Y)
 
-    #OP2 - AI mode
+    # OP2 - AI mode
     text = "2. AI Mode"
     drawText(window, font, text, OPTIONS_X, OPTION2_Y)
 
@@ -158,11 +176,13 @@ def drawMenu(window, font):
     drawText(window, font, text, OPTIONS_X, OPTION3_Y)
 
 # displays every available maze
-def drawMazeOptions(window,font):
+
+
+def drawMazeOptions(window, font):
 
     window.fill(BLACK)
 
-    #Choose Option
+    # Choose Option
     text = "Choose Maze"
     x = 165
     y = 40
@@ -174,7 +194,7 @@ def drawMazeOptions(window,font):
     x = MAZESOP_X
 
     mazeNumber = 1
-    #20 is the number of mazes
+    # 20 is the number of mazes
     for i in range(NUMBER_OF_MAZES):
         y = MAZESOP_Y
         for i in range(int(NUMBER_OF_MAZES/2)):
@@ -185,21 +205,23 @@ def drawMazeOptions(window,font):
         x += MAZESOP_XDIST
 
 # displays every available search method
-def drawSearchOptions(window,font):
+
+
+def drawSearchOptions(window, font):
 
     window.fill(BLACK)
 
-    #Choose option
+    # Choose option
     text = "Choose Search Method"
     x = 125
     y = 60
     drawText(window, font, text, x, y)
 
-    #OP1 - Human mode
+    # OP1 - Human mode
     text = "1. Breadth-First"
     drawText(window, font, text, OPTIONS_X, SEARCH_OPTION1_Y)
 
-    #OP2 - AI mode
+    # OP2 - AI mode
     text = "2. Depth-First"
     drawText(window, font, text, OPTIONS_X, SEARCH_OPTION2_Y)
 
@@ -211,21 +233,23 @@ def drawSearchOptions(window,font):
     drawText(window, font, text, OPTIONS_X, SEARCH_OPTION4_Y)
 
 # displays every available search method
-def drawHeuristicOptions(window,font):
+
+
+def drawHeuristicOptions(window, font):
 
     window.fill(BLACK)
 
-    #Choose option
+    # Choose option
     text = "Choose Heuristic"
     x = 145
     y = 60
     drawText(window, font, text, x, y)
 
-    #OP1 - Human mode
+    # OP1 - Human mode
     text = "1. Manhattan Distance"
     drawText(window, font, text, HEURISTIC_OPTIONS_X, OPTION1_Y)
 
-    #OP2 - AI mode
+    # OP2 - AI mode
     text = "2. Euclidean Distance"
     drawText(window, font, text, HEURISTIC_OPTIONS_X, OPTION2_Y)
 
@@ -235,13 +259,13 @@ def drawHeuristicOptions(window,font):
 
 
 # displays a maze and agent
-def initMaze(window,maze,goal):
+def initMaze(window, maze, goal):
 
     rectWidth = window.get_width() / len(maze)
     rectHeight = window.get_height() / len(maze[0])
 
-    drawMaze(maze,window,rectWidth,rectHeight,goal)
-    drawAgent(window,start[0],start[1],rectWidth,rectHeight,BLUE)
+    drawMaze(maze, window, rectWidth, rectHeight, goal)
+    drawAgent(window, start[0], start[1], rectWidth, rectHeight, BLUE)
 
-    return [rectWidth,rectHeight]
-#TESTING
+    return [rectWidth, rectHeight]
+# TESTING

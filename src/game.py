@@ -254,14 +254,6 @@ def aiMode(window, font):
 
             if oldPos != agentPos:
                 drawAgent(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], GREEN) #remove agent
-                """
-                if(i == "U" or i == "D"):
-                    #print(i,i)
-                    drawPathV(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], BLACK)
-                else:
-                    #print(i)
-                    drawPathH(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], BLACK)
-                """
                 drawAgent(window, agentPos[0], agentPos[1], rectSizes[0], rectSizes[1],BLUE)
                 pygame.display.flip()
 

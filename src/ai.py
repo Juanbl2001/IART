@@ -119,15 +119,12 @@ def greedy(start, goal, maze, sizeOfAnswer):
     # time saved from 0.8s -> 0.004s
     while queue:
         bestHeuristic = 999.0
+        count+=1
         for i in range(len(queue)):
-            if(queue[i][1] <= bestHeuristic):
-                if(queue[i][1] == bestHeuristic):
-                    continue
-                else:
-                    bestVal = queue[i]
-                    bestHeuristic = queue[i][1]
+            if(queue[i][1] < bestHeuristic):
+                bestVal = queue[i]
+                bestHeuristic = queue[i][1]
 
-        count += 1
         queue.remove(bestVal)
         #(bestVal[0])
 

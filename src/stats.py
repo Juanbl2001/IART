@@ -26,6 +26,7 @@ def stats(pt,s):
     ans=greedy(start, goal,p,s)
     end_greedy = time()
     time_greedy = float(end_greedy-start_greedy)
+    print("Time Greedy: ",time_greedy)
     print(ans)
 
     # BFS
@@ -39,6 +40,9 @@ def stats(pt,s):
     aStar(start, goal, p, s)
     end_astar = time()
     time_astar = float(end_astar-start_astar)
+    print("Time A*: ",time_astar)
+
+    print("Greedy ",getCostGreedy()," A*",getCostAstar())
 
     TimeEfficiency(time_dfs, time_bfs, time_greedy, time_astar, s)
     SpaceEfficiency(getCostDfs(),getCostBfs(),getCostGreedy(),getCostAstar(),s)
@@ -46,8 +50,8 @@ def stats(pt,s):
 
 # creating the dataset
 def TimeEfficiency(time_dfs,time_bfs,time_greedy,time_astar,stepsRequired):
-    data = {'DFS':time_dfs, 'BFS':time_bfs, 'Greedy':time_greedy,
-            'A*':time_astar}
+    data = {'Greedy':time_greedy,
+            'A*':time_astar,'DFS':time_dfs, 'BFS':time_bfs}
     courses = list(data.keys())
     values = list(data.values())
     
@@ -64,8 +68,8 @@ def TimeEfficiency(time_dfs,time_bfs,time_greedy,time_astar,stepsRequired):
     return
 
 def SpaceEfficiency(space_dfs,space_bfs,space_greedy,space_astar,stepsRequired):
-    data = {'DFS':space_dfs, 'BFS':space_bfs, 'Greedy':space_greedy,
-            'A*':space_astar}
+    data = {'Greedy':space_greedy,
+            'A*':space_astar,'DFS':space_dfs, 'BFS':space_bfs}
     courses = list(data.keys())
     values = list(data.values())
     
@@ -88,3 +92,31 @@ def main():
         stats(mapOption,s)
         exit()
 main()
+"""
+def heuristic():
+        labels = ['Euclidean', 'Manhattan', 'Chebyshev']
+        astar_means = [0.025,0.028,0.29]
+        greedy_means = [0.018,0.012,0.12]
+
+        x = np.arange(len(labels))  # the label locations
+        width = 0.35  # the width of the bars
+
+        fig, ax = plt.subplots()
+        rects1 = ax.bar(x - width/2, astar_means, width, label='A*')
+        rects2 = ax.bar(x + width/2, greedy_means, width, label='Greedy')
+
+        # Add some text for labels, title and custom x-axis tick labels, etc.
+        ax.set_ylabel('Time to find solution')
+        ax.set_title("Time efficiency of Algorithms with 7 steps")
+        ax.set_xticks(x, labels)
+        ax.legend()
+
+        ax.bar_label(rects1, padding=3)
+        ax.bar_label(rects2, padding=3)
+
+        fig.tight_layout()
+
+        plt.show()
+
+heuristic()
+"""

@@ -114,6 +114,44 @@ def searchCheckOption(pos):
 
     return 0
 
+def chooseHeuristic(window, font):
+
+    drawHeuristicOptions(window, font)
+
+    running = True
+    while running:
+
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                exit()
+
+            elif event.type == pygame.MOUSEBUTTONUP:
+                pos = pygame.mouse.get_pos()
+                op = heuristicCheckOption(pos)
+
+                if op == 1:
+                    return "man"
+                elif op == 2:
+                    return "euc"
+                elif op == 3:
+                    return "sheby"
+
+            pygame.display.flip()
+
+def heuristicCheckOption(pos):
+
+    x = pos[0]
+    y = pos[1]
+
+    if x >= HEURISTIC_OPTIONS_X and x <= HEURISTIC_OPTIONS_X + HEURISTIC_OP_WIDTH:
+        if y >= OPTION1_Y and y <= OPTION1_Y + OP_HEIGHT:
+            return 1
+        elif y >= OPTION2_Y and y <= OPTION2_Y + OP_HEIGHT:
+            return 2
+        elif y >= OPTION3_Y and y <= OPTION3_Y + OP_HEIGHT:
+            return 3
+        else:
+            return 0
 
 def humanMode(window, font):
     mazeName = chooseMaze(window, font)
@@ -192,9 +230,6 @@ def humanMode(window, font):
                 return
 
 
-
-
-
 def aiMode(window, font):
 
     mazeName = chooseMaze(window, font)
@@ -202,7 +237,6 @@ def aiMode(window, font):
         return
     maze = globals()[mazeName]
     method = chooseSearch(window, font)
-
 
     mazeSolSizeName = mazeName + "SolSize"
     mazeSolSize = globals()[mazeSolSizeName]
@@ -214,9 +248,11 @@ def aiMode(window, font):
         seq = dfs(start, goal, maze, mazeSolSize)
 
     elif method == "greedy":
+        heuristic = chooseHeuristic(window, font)
         seq = greedy(start, goal, maze, mazeSolSize)
 
     elif method == "astar":
+        heuristic = chooseHeuristic(window, font)
         seq = aStar(start, goal, maze, mazeSolSize)
 
     else:

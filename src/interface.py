@@ -36,6 +36,10 @@ SEARCH_OPTION2_Y = SEARCH_OPTION1_Y + Y_DIST
 SEARCH_OPTION3_Y = SEARCH_OPTION2_Y + Y_DIST
 SEARCH_OPTION4_Y = SEARCH_OPTION3_Y + Y_DIST
 
+#HEURISTIC OPTION POSITION
+HEURISTIC_OPTIONS_X = 110
+HEURISTIC_OP_WIDTH = 160
+
 # set up pygame window
 BLOCK = 100
 FPS = 60
@@ -133,6 +137,8 @@ def drawText(window, font, text, x, y):
 # draws the game's initial menu
 def drawMenu(window, font):
 
+    window.fill(BLACK)
+
     #Choose option
     text = "Choose Option"
     x = 160
@@ -203,6 +209,30 @@ def drawSearchOptions(window,font):
 
     text = "3. A* (A-star)"
     drawText(window, font, text, OPTIONS_X, SEARCH_OPTION4_Y)
+
+# displays every available search method
+def drawHeuristicOptions(window,font):
+
+    window.fill(BLACK)
+
+    #Choose option
+    text = "Choose Heuristic"
+    x = 145
+    y = 60
+    drawText(window, font, text, x, y)
+
+    #OP1 - Human mode
+    text = "1. Manhattan Distance"
+    drawText(window, font, text, HEURISTIC_OPTIONS_X, OPTION1_Y)
+
+    #OP2 - AI mode
+    text = "2. Euclidean Distance"
+    drawText(window, font, text, HEURISTIC_OPTIONS_X, OPTION2_Y)
+
+    # OP3 - EXIT
+    text = "3. Chebyshev Distance"
+    drawText(window, font, text, HEURISTIC_OPTIONS_X, OPTION3_Y)
+
 
 # displays a maze and agent
 def initMaze(window,maze,goal):

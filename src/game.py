@@ -156,7 +156,7 @@ def aiMode(window, font):
 
     while solving == True:
         for i in seq:
-            sleep(0.1)
+            sleep(0.5)
             if agentPos == goal:
                 solving = False
                 break
@@ -173,13 +173,15 @@ def aiMode(window, font):
 
             if(oldPos != agentPos):
                 drawAgent(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], WHITE) #remove agent
+                """
                 if(i == "U" or i == "D"):
-                    print(i,i)
+                    #print(i,i)
                     drawPathV(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], BLACK)
                 else:
-                    print(i)
+                    #print(i)
                     drawPathH(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], BLACK)
-                drawAgent(window, agentPos[0], agentPos[1], rectSizes[0], rectSizes[1],RGB(16, 44, 53))
+                """
+                drawAgent(window, agentPos[0], agentPos[1], rectSizes[0], rectSizes[1],BLUE)
                 pygame.display.flip()
 
 def main():

@@ -2,10 +2,6 @@ import pygame
 from utils import *
 from maps import *
 
-# set up pygame window
-FPS = 60
-BLOCK = 140
-
 # Define colours
 WHITE = (255, 255, 255)
 GREEN = (0, 51, 0)
@@ -16,6 +12,16 @@ BLACK = (0,0,0)
 
 # FONTS
 FONT = 'calibri'
+
+#OPTIONS POSITION
+Y_DIST = 75
+OPTIONS_X = 150
+OPTION1_Y = 200
+OPTION2_Y = OPTION1_Y + Y_DIST
+OPTION3_Y = OPTION2_Y + Y_DIST
+OP_WIDTH = 200
+OP_HEIGHT = 30
+
 
 def drawRect(window, posX, posY, rectWidth, rectHeight):
 
@@ -38,15 +44,15 @@ def drawWall(window, posX, posY, rectWidth, rectHeight, side):
     pygame.draw.rect(window, BLACK, (posX, posY, wallWidth, wallHeight))
 
 
-def drawAgent(window, x, y):
+def drawAgent(window, x, y, rectWidth, rectHeight,block):
 
     if window.get_width() < window.get_height():
         aux = window.get_width()
     else:
         aux = window.get_height()
 
-    radius = 0.1 * aux
-    pygame.draw.circle(window,BLUE,(x,y),radius)
+    radius = 0.06 * aux
+    pygame.draw.circle(window,BLUE,(x*block+rectWidth/2,y*block+rectHeight/2),radius)
 
 def drawExit(window, exit, rectWidth, rectHeight):
 
@@ -70,7 +76,7 @@ def drawExit(window, exit, rectWidth, rectHeight):
         y = rectHeight * exit[1]
     '''
 
-    pygame.draw.rect(window,RED,(exit[0]*BLOCK,exit[1]*BLOCK,rectWidth,rectHeight))
+    pygame.draw.rect(window,RED,(exit[0]*rectWidth,exit[1]*rectHeight,rectWidth,rectHeight))
 
 def drawMaze(maze, window, rectWidth, rectHeight, goal):
 
@@ -117,73 +123,36 @@ def drawText(window, font, text, x, y):
     textRenderer = font.render(text, False, WHITE)
     window.blit(textRenderer, (x, y))
 
-def menu(window, op):
-    
+def drawMenu(window, op):
+
     pygame.font.init()
     font = pygame.font.SysFont(FONT, 30)
 
     #Choose option
     text = "Choose Option"
-    x = 115
-    y = 50
+    x = 160
+    y = 60
     drawText(window, font, text, x, y)
 
     #OP1 - Human mode
     text = "1. Human Mode"
-    x = 115
-    y = 150
-    drawText(window, font, text, x, y)
+    drawText(window, font, text, OPTIONS_X, OPTION1_Y)
 
     #OP2 - AI mode
     text = "2. AI Mode"
-    x = 115
-    y = 225
-    drawText(window, font, text, x, y)
+    drawText(window, font, text, OPTIONS_X, OPTION2_Y)
 
     # OP3 - EXIT
     text = "3. Exit"
-    x = 115
-    y = 300
-    drawText(window, font, text, x, y)
+    drawText(window, font, text, OPTIONS_X, OPTION3_Y)
 
 
-def initMaze(maze,goal):
-
-    pygame.init()
-    pygame.mixer.init()
-    pygame.display.set_caption("Python Maze Generator")
-    clock = pygame.time.Clock()
-
-    width = len(maze[0]*BLOCK)
-    height = len(maze*BLOCK)
-
-    if width > 600:
-        width = 600
-    if height > 600:
-        height = 600
-
-    window = pygame.display.set_mode([width, height])
+def initMaze(window,maze,goal,block):
 
     rectWidth = window.get_width() / len(maze)
     rectHeight = window.get_height() / len(maze[0])
 
-    #drawMaze(maze,window,rectWidth,rectHeight,goal)
-    #drawAgent(window,rectWidth/2,rectHeight/2)
-    menu(window, 1)
-
-    running = True
-    while running:
-        clock.tick(FPS)
-        # Did the user click the window close button?
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                running = False
-
-        # Flip the display
-        pygame.display.flip()
-
-    pygame.quit()
-
+    drawMaze(maze,window,rectWidth,rectHeight,goal)
+    drawAgent(window,start[0],start[1],rectWidth,rectHeight,block)
 
 #TESTING
-initMaze(test4, testGoal4)

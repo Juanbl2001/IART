@@ -65,7 +65,7 @@ def drawWall(window, posX, posY, rectWidth, rectHeight, side):
     pygame.draw.rect(window, BLACK, (posX, posY, wallWidth, wallHeight))
 
 
-def drawAgent(window, x, y, rectWidth, rectHeight):
+def drawAgent(window, x, y, rectWidth, rectHeight, color):
 
     if window.get_width() < window.get_height():
         aux = window.get_width()
@@ -73,11 +73,11 @@ def drawAgent(window, x, y, rectWidth, rectHeight):
         aux = window.get_height()
 
     radius = 0.06 * aux
-    pygame.draw.circle(window,BLUE,(x*BLOCK+rectWidth/2,y*BLOCK+rectHeight/2),radius)
+    pygame.draw.circle(window,color,(y*BLOCK+rectWidth/2,x*BLOCK+rectHeight/2),radius)
 
 def drawExit(window, exit, rectWidth, rectHeight):
 
-    pygame.draw.rect(window,RED,(exit[0]*rectWidth,exit[1]*rectHeight,rectWidth,rectHeight))
+    pygame.draw.rect(window,RED,(exit[1]*rectWidth,exit[0]*rectHeight,rectWidth,rectHeight))
 
 
 def drawWalls(window, elem, posX, posY, rectWidth, rectHeight):
@@ -207,7 +207,7 @@ def initMaze(window,maze,goal):
     rectHeight = window.get_height() / len(maze[0])
 
     drawMaze(maze,window,rectWidth,rectHeight,goal)
-    drawAgent(window,start[0],start[1],rectWidth,rectHeight)
+    drawAgent(window,start[0],start[1],rectWidth,rectHeight,BLUE)
 
     return [rectWidth,rectHeight]
 #TESTING

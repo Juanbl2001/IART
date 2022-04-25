@@ -170,7 +170,7 @@ def aiMode(window, font):
     maze = globals()[mazeName]
     method = chooseSearch(window, font)
 
-    #print(method)
+
     mazeSolSizeName = mazeName + "SolSize"
     mazeSolSize = globals()[mazeSolSizeName]
 
@@ -179,7 +179,7 @@ def aiMode(window, font):
     if method == "bfs":
         seq = bfs(start, goal, maze)
 
-    elif method == "dps":
+    elif method == "dfs":
         seq = dfs(start, goal, maze, mazeSolSize)
 
     elif method == "greedy":
@@ -188,16 +188,25 @@ def aiMode(window, font):
     elif method == "astar":
         seq = aStar(start, goal, maze, mazeSolSize)
 
+    else:
+        return
+
     rectSizes = initMaze(window, maze, goal)
+    pygame.display.flip()
+    sleep(1)
 
     agentPos = start
     solving = True
+    print("Sequence:", seq, "\nSolution:")
+
     while solving == True:
         for i in seq:
             sleep(1)
             if agentPos == goal:
                 solving = False
                 break
+
+            print(i)
 
             oldPos = agentPos
             if i == "R":
@@ -209,9 +218,8 @@ def aiMode(window, font):
             elif i == "U":
                 agentPos = getUp(agentPos, maze)
 
-            #drawRect(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1])
-            #drawWalls(window, , oldPos[0]*BLOCK, oldPos[1]*BLOCK, rectSizes[0], rectSizes[1])
-            drawAgent(window, agentPos[0], agentPos[1], rectSizes[0], rectSizes[1])
+            drawAgent(window, oldPos[0], oldPos[1], rectSizes[0], rectSizes[1], WHITE)
+            drawAgent(window, agentPos[0], agentPos[1], rectSizes[0], rectSizes[1],BLUE)
             pygame.display.flip()
 
 def main():
